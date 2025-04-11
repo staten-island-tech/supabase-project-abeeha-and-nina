@@ -11,6 +11,12 @@ async function signInWithEmail() {
     email: email.value,
     password: password.value,
   })
+
+if (error) {
+    alert('error:', error.message)
+  } else {
+    alert('You are now logged into the Finance App!', data)
+  }
 }
 </script>
 
