@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import HomeView from './views/HomeView.vue';
 </script>
 
 <template>
@@ -8,14 +9,10 @@ import { RouterLink, RouterView } from 'vue-router'
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
-
+      <HomeView></HomeView>
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/login">Log In</RouterLink>
-        <RouterLink to="/register">Register</RouterLink>
-      </nav>
+</nav>
     </div>
   </header>
 
-  <RouterView />
 </template>
