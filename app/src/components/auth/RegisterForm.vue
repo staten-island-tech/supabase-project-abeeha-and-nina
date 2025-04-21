@@ -1,21 +1,21 @@
 <template>
-  <div>
-    <h1>Register here!</h1>
-    <form @submit.prevent="registerUser">
-      <label for="name">What is your name?</label><br />
-      <input type="text" id="name" v-model="name" /><br />
-      <label for="email">What is your email?</label><br />
-      <input type="email" id="email" v-model="email" /><br />
-      <label for="password">Create a secure password:</label><br />
-      <input type="password" id="password" v-model="password" /><br />
-      <input type="submit" value="Register for an account" />
-    </form>
-  </div>
+    <div>
+      <h1>Register here!</h1>
+      <form @submit.prevent="registerUser">
+        <label for="name">What is your name?</label><br>
+        <input type="text" id="name" v-model="name"><br>
+        <label for="email">What is your email?</label><br>
+        <input type="email" id="email" v-model="email"><br>
+        <label for="password">Create a secure password:</label><br>
+        <input type="password" id="password" v-model="password"><br>
+        <input type="submit" value="Register for an account">
+      </form>
+    </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-// import {supabase} from "../../supabase.ts"
+import {supabase} from "../../supabase.ts"
 
 const name = ref('')
 const email = ref('')
@@ -27,9 +27,9 @@ const registerUser = async () => {
     password: password.value,
     options: {
       data: {
-        name: name.value,
-      },
-    },
+        name: name.value
+      }
+    }
   })
 
   if (error) {
