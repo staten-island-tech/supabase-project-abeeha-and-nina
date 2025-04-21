@@ -9,7 +9,7 @@ import HomeView from './views/HomeView.vue';
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
-      <HomeView></HomeView>
+      <RouterView/>
       <nav>
 </nav>
     </div>

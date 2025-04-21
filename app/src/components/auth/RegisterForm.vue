@@ -11,7 +11,7 @@
         <input type="submit" value="Register for an account">
       </form>
     </div>
-  </template>
+</template>
 
 <script setup>
 import { ref } from 'vue'
