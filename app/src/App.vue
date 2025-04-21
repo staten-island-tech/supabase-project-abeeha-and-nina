@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HomeView from './views/HomeView.vue';
+import HomeView from './views/HomeView.vue'
 </script>
 
 <template>
@@ -10,9 +10,7 @@ import HomeView from './views/HomeView.vue';
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
       <HomeView></HomeView>
-      <nav>
-</nav>
+      <nav></nav>
     </div>
   </header>
-
 </template>
