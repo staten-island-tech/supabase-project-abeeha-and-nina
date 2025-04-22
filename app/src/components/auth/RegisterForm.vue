@@ -3,11 +3,11 @@
       <h1>Register here!</h1>
       <form @submit.prevent="registerUser">
         <label for="name">What is your name?</label><br>
-        <input type="text" id="name" v-model="name"><br>
+        <input placeholder="Full Name" type="text" id="name" v-model="name"><br>
         <label for="email">What is your email?</label><br>
-        <input type="email" id="email" v-model="email"><br>
+        <input placeholder="Email" type="email" id="email" v-model="email"><br>
         <label for="password">Create a secure password:</label><br>
-        <input type="password" id="password" v-model="password"><br>
+        <input placeholder="Password" type="password" id="password" v-model="password"><br>
         <input type="submit" value="Register for an account">
       </form>
     </div>
