@@ -10,6 +10,8 @@
         <input placeholder="Password" type="password" id="password" v-model="password"><br>
         <input type="submit" value="Register for an account">
       </form>
+      <RouterLink to="/login" class="text-blue-600 hover:underline font-medium"
+        >Login Instead</RouterLink>
     </div>
 </template>
 
@@ -31,11 +33,16 @@ const registerUser = async () => {
       }
     }
   })
-
-  if (error) {
-    alert('error:', error.message)
+  if (name.length===0||email.length===0||password.length===0){
+    alert("You have not filled out one of the fields.")
+    return;
+  }
+  else if (error) {
+    alert('You are already registered in this Finance App. Please login.', error.message)
+    return;
   } else {
-    alert('You are now registered in the Finance App!', data)
+    alert('You are now registered in the Finance App!', data);
+    router.push()
   }
 }
 </script>
