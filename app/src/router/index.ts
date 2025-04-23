@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import RegisterForm from '@/components/auth/RegisterForm.vue'
 import LoginForm from '@/components/auth/LoginForm.vue'
+import ResetPassword from "@/components/auth/ResetPassword.vue"
 
 const router = createRouter({
   history: createWebHistory('/'),
@@ -20,6 +21,11 @@ const router = createRouter({
       path: '/register',
       name: 'register',
       component: RegisterForm,
+    },
+    {
+      path: '/resetpw',
+      name: 'resetpw',
+      component: ResetPassword,
     },
   ],
 })
