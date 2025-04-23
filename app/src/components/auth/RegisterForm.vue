@@ -33,16 +33,7 @@ const registerUser = async () => {
       }
     }
   })
-  if (name.length===0||email.length===0||password.length===0){
-    alert("You have not filled out one of the fields.")
-    return;
-  }
-  else if (error) {
-    alert('You are already registered in this Finance App. Please login.', error.message)
-    return;
-  } else {
-    alert('You are now registered in the Finance App!', data);
-    router.push()
-  }
+  if (error) alert('You are already registered in this Finance App. Please login.', error.message);
+  else alert('You are now registered in the Finance App!', data);
 }
 </script>
