@@ -2,8 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import RegisterForm from '@/components/auth/RegisterForm.vue'
 import LoginForm from '@/components/auth/LoginForm.vue'
-import ResetPassword from '@/components/auth/ResetPassword.vue'
+import ResetEmail from '@/components/auth/ResetPassword/ResetEmail.vue'
 import DashboardView from '@/views/DashboardView.vue'
+import UpdatePassword from '@/components/auth/ResetPassword/UpdatePassword.vue'
 
 const router = createRouter({
   history: createWebHistory('/'),
@@ -31,7 +32,12 @@ const router = createRouter({
     {
       path: '/reset',
       name: 'reset',
-      component: ResetPassword,
+      component: ResetEmail,
+    },
+    {
+      path: '/update-password',
+      name: 'update-password',
+      component: UpdatePassword,
     },
   ],
 })
