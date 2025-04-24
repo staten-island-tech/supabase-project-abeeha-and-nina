@@ -5,6 +5,7 @@ import LoginForm from '@/components/auth/LoginForm.vue'
 import ResetEmail from '@/components/auth/ResetPassword/ResetEmail.vue'
 import DashboardView from '@/views/DashboardView.vue'
 import AuthPage from '@/views/AuthPage.vue'
+import UpdatePassword from "@/components/auth/ResetPassword/UpdatePassword.vue"
 
 const router = createRouter({
   history: createWebHistory('/'),
