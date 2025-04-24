@@ -4,6 +4,7 @@ import RegisterForm from '@/components/auth/RegisterForm.vue'
 import LoginForm from '@/components/auth/LoginForm.vue'
 import ResetPassword from '@/components/auth/ResetPassword.vue'
 import DashboardView from '@/views/DashboardView.vue'
+import AuthPage from '@/views/AuthPage.vue'
 
 const router = createRouter({
   history: createWebHistory('/'),
@@ -32,6 +33,11 @@ const router = createRouter({
       path: '/reset',
       name: 'reset',
       component: ResetPassword,
+    },
+    {
+      path: '/auth',
+      name: 'auth',
+      component: AuthPage,
     },
   ],
 })

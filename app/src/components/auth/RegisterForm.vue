@@ -10,8 +10,6 @@
         <input placeholder="Password" type="password" id="password" v-model="password"><br>
         <input type="submit" value="Register for an account">
       </form>
-      <RouterLink to="/login" class="text-blue-600 hover:underline font-medium"
-        >Login Instead</RouterLink>
     </div>
 </template>
 
