@@ -24,6 +24,4 @@ async function signInWithEmail() {
 </form>
 <RouterLink to="/reset" class="text-blue-600 hover:underline font-medium"
         >Reset Password</RouterLink><br>
-<RouterLink to="/register" class="text-blue-600 hover:underline font-medium"
-        >Register Instead</RouterLink>
 </template>
