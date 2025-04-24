@@ -1,18 +1,13 @@
 <template>
-<input placeholder="New Password" type="password" id="newpassword" v-model="newpassword"><br>
-<input type="submit" @click="updatePassword()">Submit</input>
+
+<input placeholder="Enter Email" v-model="email"></input>
+
 </template>
 <script>
 
-async function updatePassword() {
-const { data, error } = await supabase.auth.updateUser({
-  email: newpassword.value
-})
-if (error) {
-    console.error('Error resetting password:', error)
-  } else {
-    console.log('Password reset successfully', data)
-  }
+async function sendresetEmail() {
+  const { data, error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: 'https://xycrjhhgpeqxbwydtjzl.supabase.co/update-password', })
+
 }
 
 </script>

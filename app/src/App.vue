@@ -6,7 +6,6 @@ import HomeView from './views/HomeView.vue';
 <template>
   <header>
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
       <RouterView/>
       <nav>
 </nav>
