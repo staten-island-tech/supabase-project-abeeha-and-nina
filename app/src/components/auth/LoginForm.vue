@@ -7,12 +7,20 @@ const email = ref("");
 
 
 async function signInWithEmail() {
-  const { data, error } = await supabase.auth.signInWithPassword({
+  const { data , error } = await supabase.auth.signInWithPassword({
     email: email.value,
     password: password.value,
-  })
+    options: {
+        emailRedirectTo: "https://Abeeha-Nina-Fiance-App/dashboard"
+      }
+    }
+)
+  if (error) alert('Invalid email or password');
+  else {
+    alert("Logged in successfully!")
 
-}
+  }
+  }
 </script>
 
 <template>

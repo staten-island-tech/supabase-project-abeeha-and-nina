@@ -27,7 +27,8 @@ const registerUser = async () => {
     password: password.value,
     options: {
       data: {
-        name: name.value
+        name: name.value,
+        emailRedirectto: "https://Abeeha-Nina-Fiance-App/login"
       }
     }
   })
