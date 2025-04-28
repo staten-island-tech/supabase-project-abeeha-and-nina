@@ -34,4 +34,19 @@ const registerUser = async () => {
   if (error) alert('You are already registered in this Finance App. Please login.', error.message);
   else alert('You are now registered in the Finance App!', data);
 }
+
+const linkUsers = async () => {
+  const { data, error} = await supabase.from('Users').insert({
+    email: email.value,
+    password: password.value,
+    user_name: name.value,
+    options: {
+      data: {
+        user_name: name.value
+      }
+    }
+  })
+  if (error) alert('You are already registered in this Finance App. Please login.', error.message);
+  else alert('You are now registered in the Finance App!', data);
+}
 </script>
