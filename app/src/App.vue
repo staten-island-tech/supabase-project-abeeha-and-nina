@@ -8,7 +8,7 @@ import { RouterLink, RouterView } from 'vue-router'
       <h1>Welcome to the Finance App!</h1>
       <RouterLink to="/auth" class="text-blue-600 hover:underline font-medium"
         >Register or Login Here</RouterLink><br/>
-      <RouterView/>
+      <!-- <RouterView/> -->
       <nav>
       </nav>
     </div>
