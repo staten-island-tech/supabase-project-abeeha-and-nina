@@ -32,21 +32,20 @@ const registerUser = async () => {
     }
   })
   if (error) alert('You are already registered in this Finance App. Please login.', error.message);
-  else alert('You are now registered in the Finance App!', data);
+  else{
+    alert('You are now registered in the Finance App!' + data);
+    await linkUsers(data.user.id);
+  }
 }
 
-const linkUsers = async () => {
-  const { data, error} = await supabase.from('Users').insert({
+const linkUsers = async (userId) => {
+  const { error} = await supabase.from('Users').insert({
+    id: userId,
     email: email.value,
     password: password.value,
     user_name: name.value,
-    options: {
-      data: {
-        user_name: name.value
-      }
-    }
   })
-  if (error) alert('You are already registered in this Finance App. Please login.', error.message);
-  else alert('You are now registered in the Finance App!', data);
+  if (error) alert('Error linking user to the table' + error.message);
+  else alert('You are now in the Users table!');
 }
 </script>
