@@ -5,4 +5,8 @@ export interface User {
     email: string;
   }
 
-export interface 
+export default interface DashboardView {
+  name: string,
+  isActive?: boolean,
+
+}
