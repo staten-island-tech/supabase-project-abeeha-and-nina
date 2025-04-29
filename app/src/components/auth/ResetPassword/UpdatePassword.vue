@@ -1,6 +1,8 @@
 <template>
     <input placeholder="New Password" type="password" id="newpassword" v-model="newpassword"><br>
     <input type="submit" @click="updatePassword()">Submit</input>
+    <RouterLink to="/login" class="text-blue-600 hover:underline font-medium"
+        >Log In</RouterLink><br>
     
     </template>
     <script>
