@@ -27,13 +27,14 @@ const registerUser = async () => {
     password: password.value,
     options: {
       data: {
-        name: name.value
+        name: name.value,
+        confirmation_sent_at: Date.now(),
       }
     }
   })
-  if (error) alert('You are already registered in this Finance App. Please login.', error.message);
+  if (error) alert('There was an error signing you up.', error.message);
   else{
-    alert('You are now registered in the Finance App!' + data);
+    alert('You are now registered in the Finance App!');
     await linkUsers(data.user.id);
   }
 }
