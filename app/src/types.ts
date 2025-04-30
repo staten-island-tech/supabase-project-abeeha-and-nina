@@ -10,3 +10,4 @@ export default interface DashboardView {
   isActive?: boolean,
 
 }
+

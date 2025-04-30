@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {supabase} from "../../supabase.ts"
 import { ref } from 'vue'
+import router from "@/router/index.ts";
 
 const password = ref('');
 const email = ref("");
@@ -10,15 +11,16 @@ async function signInWithEmail() {
   const { data , error } = await supabase.auth.signInWithPassword({
     email: email.value,
     password: password.value,
-    options: {
-        emailRedirectTo: "https://Abeeha-Nina-Fiance-App/dashboard"
-      }
     }
 )
-  if (error) alert('Invalid email or password');
+  if (error) {
+    console.error(error);
+    alert('Invalid email or password');
+  }
   else {
-    alert("Logged in successfully!")
-
+    console.log(data);
+    alert("Logged in successfully!");
+    router.push("/dashboard")
   }
   }
 </script>

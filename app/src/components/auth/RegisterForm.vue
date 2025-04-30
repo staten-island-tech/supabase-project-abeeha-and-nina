@@ -8,14 +8,14 @@
         <input placeholder="Email" type="email" id="email" v-model="email"><br>
         <label for="password">Create a secure password:</label><br>
         <input placeholder="Password" type="password" id="password" v-model="password"><br>
-        <input type="submit" value="Register for an account">
+        <button type="submit" value="Register for an account"></button>
       </form>
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
-import {supabase} from "../../supabase.ts"
+import {supabase} from "../../supabase"
 
 const name = ref('')
 const email = ref('')
@@ -32,7 +32,13 @@ const registerUser = async () => {
       }
     }
   })
-  if (error) alert('You are already registered in this Finance App. Please login.', error.message);
-  else alert('You are now registered in the Finance App!', data);
+  if (error) {
+    alert('You are already registered in this Finance App. Please login.')
+    console.error(error);
+  }
+  else {
+    alert('You are now registered in the Finance App!');
+    console.log(data);
+  }
 }
 </script>
