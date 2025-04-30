@@ -8,7 +8,7 @@
         <input placeholder="Email" type="email" id="email" v-model="email"><br>
         <label for="password">Create a secure password:</label><br>
         <input placeholder="Password" type="password" id="password" v-model="password"><br>
-        <button type="submit" value="Register for an account"></button>
+        <button type="submit" value="Register for an account">Submit</button>
       </form>
     </div>
 </template>
@@ -28,7 +28,7 @@ const registerUser = async () => {
     options: {
       data: {
         name: name.value,
-        emailRedirectto: "https://Abeeha-Nina-Fiance-App/login"
+        emailRedirectto: "https://xycrjhhgpeqxbwydtjzl.supabase.co/login"
       }
     }
   })
