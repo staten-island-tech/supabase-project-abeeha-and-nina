@@ -41,9 +41,8 @@ const registerUser = async () => {
 
 const linkUsers = async (userId) => {
   const { error} = await supabase.from('Users').insert({
-    id: userId,
+    auth_id: userId,
     email: email.value,
-    password: password.value,
     user_name: name.value,
   })
   if (error) alert('Error linking user to the table' + error.message);
