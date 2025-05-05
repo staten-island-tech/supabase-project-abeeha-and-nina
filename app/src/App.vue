@@ -4,9 +4,9 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <header>
+    <h1 class="flex justify-center font-extrabold text-4xl ml-48 px-4 py-4">Welcome to the Finance App!</h1>
     <div class="wrapper">
-      <h1>Welcome to the Finance App!</h1>
-      <RouterLink to="/auth" class="text-blue-600 hover:underline font-medium"
+      <RouterLink to="/auth" class="hover:text-xl duration-150 font-medium flex justify-center italic"
         >Register or Login Here</RouterLink><br/>
       <RouterView/>
       <nav>
