@@ -2,6 +2,6 @@
     <h1>Welcome to the Finance App</h1>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 
 </script>

@@ -1,18 +1,28 @@
 <script setup lang="ts">
 import {supabase} from "../../supabase.ts"
 import { ref } from 'vue'
+import router from "@/router/index.ts";
 
 const password = ref('');
 const email = ref("");
 
 
 async function signInWithEmail() {
-  const { data, error } = await supabase.auth.signInWithPassword({
+  const { data , error } = await supabase.auth.signInWithPassword({
     email: email.value,
     password: password.value,
-  })
-
-}
+    }
+)
+  if (error) {
+    console.error(error);
+    alert('Invalid email or password');
+  }
+  else {
+    console.log(data);
+    alert("Logged in successfully!");
+    router.push("/dashboard")
+  }
+  }
 </script>
 
 <template>
