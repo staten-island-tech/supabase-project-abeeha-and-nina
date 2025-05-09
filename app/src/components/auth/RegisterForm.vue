@@ -1,15 +1,25 @@
 <template>
-    <div>
-      <h1>Register here!</h1>
+    <div class="flex justify-center">
+      <div class="bg-base-100 w-1/4 pb-8 pt-6 h-auto border-2 hover:border-4 duration-200 rounded-lg my-5 min-w-64 shadow-lg">
+      <h1 class="text-center text-2xl text-neutral my-1 mx-5 font-bold">Register here!</h1>
       <form @submit.prevent="registerUser">
-        <label for="name">What is your name?</label><br>
-        <input placeholder="Full Name" type="text" id="name" v-model="name"><br>
-        <label for="email">What is your email?</label><br>
-        <input placeholder="Email" type="email" id="email" v-model="email"><br>
-        <label for="password">Create a secure password:</label><br>
-        <input placeholder="Password" type="password" id="password" v-model="password"><br>
-        <button type="submit" value="Register for an account">Submit</button>
+        <label for="name" class="pt-3 flex justify-center pb-2">What is your name?</label>
+        <div class="flex justify-center">
+        <input class="text-center" placeholder="Full Name" type="text" id="name" v-model="name">
+      </div>
+        <label for="email" class="flex justify-center pt-3">What is your email?</label>
+        <div class="flex justify-center">
+        <input class="text-center" placeholder="Email" type="email" id="email" v-model="email">
+      </div>
+        <label for="password" class="flex justify-center pt-3">Create a secure password:</label>
+        <div class="flex justify-center">
+        <input class="text-center" placeholder="Password" type="password" id="password" v-model="password">
+      </div>
+      <div class="flex justify-center pt-3 hover:text-xl duration-200 font-medium italic">
+        <input type="submit" value="Ready to Register!">
+      </div>
       </form>
+    </div>
     </div>
 </template>
 
