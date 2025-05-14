@@ -18,6 +18,9 @@ onMounted(() => {
 
 <template>
   <header>
+        <div class="pt-3 flex justify-center">
+    <RouterLink to="/" class="border-2 cursor-pointer px-3 py-3 rounded-lg hover:text-xl duration-200">Home</RouterLink>
+    </div>
     <h1
       ref="headerRef"
       class="flex justify-center font-extrabold text-4xl ml-48 px-4 py-4"

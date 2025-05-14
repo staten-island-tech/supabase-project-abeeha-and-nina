@@ -42,7 +42,7 @@ const registerUser = async () => {
       }
     }
   })
-  if (error) alert('There was an error signing you up.', error.message);
+  if (error) alert(error.message);
   else{
     alert('You are now registered in the Finance App!');
     await linkUsers(data.user.id);
@@ -55,7 +55,6 @@ const linkUsers = async (userId) => {
     email: email.value,
     user_name: name.value,
   })
-  if (error) alert('Error linking user to the table' + error.message);
-  else alert('You are now in the Users table!');
 }
+
 </script>
