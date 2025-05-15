@@ -30,7 +30,7 @@ onMounted(() => {
     <div class="wrapper">
       <RouterLink to="/auth" class="hover:text-xl duration-150 font-medium flex justify-center italic"
         >Register or Login Here</RouterLink><br/>
-      <RouterView/>
+      <!-- <RouterView/> -->
       <nav>
       </nav>
     </div>
