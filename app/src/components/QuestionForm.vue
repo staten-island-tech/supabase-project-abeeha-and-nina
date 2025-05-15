@@ -30,7 +30,7 @@
     <div>
     <input id="expenseData.shopping" placeholder="Estimated Monthly Shopping cost"/>
     <select v-model="expenseData.shopping.cost_type" >
-        <option value="flex">Flexible</option>
+        <option value="flexible">Flexible</option>
         <option value="fixed">Fixed</option>
     </select>
     </div>
@@ -39,7 +39,7 @@
 </form>
 
 <div>
-    <h1>Please verify information before submitting.</h1><br>
+    <h1>Please verify that the information provided is:</h1><br>
 
     <h2>Monthly Gorcery Cost: {{expenseData.groceries.value}} </h2>
     <h2>Type: {{ expenseData.groceries.cost_type }}</h2> <br>
@@ -49,34 +49,26 @@
 
     <h2>Monthly Shopping Cost: {{expenseData.shopping.value}}</h2>
     <h2>Type: {{ expenseData.shopping.cost_type }}</h2><br>
-
-
-    
-
 </div>
 
 </template>
 
-
 <script setup lang="ts">
+//make formDatat a speparate component bc Im gonna need it againa and tis too coplex to be inline
 import {reactive, ref} from "vue"
 
 
 const expenseData = reactive({
-    groceries: { value:0, cost_type:""},  //in types.ts, interface formData, int expected for value, and string for cost_type
-    utilities: { value:0, cost_type:""},
-    shopping: {value:0, cost_type:""}
-
-
+    groceries: { value:0, cost_type:"fixed"}, 
+    utilities: { value:0, cost_type:"fixed"},
+    shopping: {value:0, cost_type:"fixed"}
 
 })
 
 function previewInfo() {
-    
+    //contianer.innerHTML=""
 }
-    
 
-//append info to formData before profile, bc we need to likely preview it before changing main state
-//user needs to be able to select type, type needs to be shown. So each property has its own property so it needs to be an object
+
 
 </script>
