@@ -66,7 +66,7 @@ const showPreview = ref("false")
 
 function previewInfo() {
     showPreview.value = "true"
-
+    
 
 
 }
