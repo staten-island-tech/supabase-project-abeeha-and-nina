@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router';
-// import AuthPage from './views/AuthPage.vue';
+import AuthPage from './views/AuthPage.vue';
 import { gsap } from "gsap"
 import { ref, onMounted } from 'vue'
+import { useAuthStore } from './stores/pinia';
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import router from './router';
+
 
 const headerRef = ref<HTMLElement | null>(null)
 
@@ -14,6 +19,20 @@ onMounted(() => {
     ease: "power2.out"
   })
 })
+
+const pinia = createPinia()
+const app = createApp(App)
+
+app.use(router)
+app.use(pinia)
+
+router.beforeEach((to) => {
+
+  const main = useAuthStore(pinia)
+
+  if (main.isLoggedIn) return '/login'
+})
+
 </script>
 
 <template>
@@ -30,7 +49,7 @@ onMounted(() => {
     <div class="wrapper">
       <RouterLink to="/auth" class="hover:text-xl duration-150 font-medium flex justify-center italic"
         >Register or Login Here</RouterLink><br/>
-      <!-- <RouterView/> -->
+      <RouterView/>
       <nav>
       </nav>
     </div>
