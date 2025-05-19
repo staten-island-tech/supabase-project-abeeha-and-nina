@@ -2,7 +2,7 @@
 @import './base.css';
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark, nord;
+  themes: ["light", "synthwave"]
 }
 body {
   font-family: "Playfair Display", serif;

@@ -26,6 +26,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import {supabase} from "../../supabase"
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '../../stores/pinia'
+
+const router = useRouter()
+const auth = useAuthStore()
 
 const name = ref('')
 const email = ref('')
@@ -46,6 +51,9 @@ const registerUser = async () => {
   else{
     alert('You are now registered in the Finance App!');
     await linkUsers(data.user.id);
+    auth.login();
+    router.push("/");
+
   }
 }
 

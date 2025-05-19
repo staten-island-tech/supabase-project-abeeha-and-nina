@@ -6,7 +6,6 @@
       >Sign Up</RouterLink
     ><br/>
     <RouterLink to="/login" class="hover:text-xl duration-200 font-medium flex justify-center mb-2 mx-5">Sign In</RouterLink><br/>
-    <RouterLink to="/login" class="hover:text-xl duration-200 font-medium flex justify-center mb-2 mx-5">Sign Out</RouterLink>
   </div>
 </div>
 </template>
@@ -14,6 +13,5 @@
 <script setup lang="ts">
 
 import { RouterLink, RouterView } from 'vue-router'
-import { useAuthStore } from '@stores/pinia.ts'
 
 </script>
