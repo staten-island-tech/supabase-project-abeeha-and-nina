@@ -27,14 +27,14 @@ export interface QuestionForm {
   isActive?: boolean
 }
 
-export interface UserProperty {
+export type category  = {
+  name: string,
   value: number,
   cost_type: CostType,
 
 }
 
-export interface formData {
-  groceries: UserProperty,
-  utilities: UserProperty,
-  shopping: UserProperty
+export interface categories {
+  category:category
 }
+

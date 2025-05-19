@@ -11,29 +11,21 @@
 
 <form>
     <h1>EXPENSE FORM</h1>
+    <h1>Add Spending Categories</h1>
     <div>
-    <input v-model="expenseData.groceries.value" placeholder="Estimated Monthly Grocery cost"/>
-    <select v-model="expenseData.groceries.cost_type" >
+    <input :v-model="categories.category.name" placeholder="Name"/>
+    <input :v-model="categories.category.value" placeholder="Spending Limit"/>
+    <select v-model="categories.category.cost_type" >
         <option value="flex">Flexible</option>
         <option value="fixed">Fixed</option>
     </select>
     </div>
+    <btn @click="addCategory()">Add Category</btn>
+    <btn>Done</btn> 
+<div :v-for="(category) in categories" :key="category.name">
 
-    <!-- <div>
-    <input v-model="expenseData.utilities" placeholder="Estimated Monthly Utilities cost"/>
-    <select v-model="expenseData.utilities.cost_type" >
-        <option value="flex">Flexible</option>
-        <option value="fixed">Fixed</option>
-    </select>
-    </div>
-    <h1>SHOPPING</h1>
-    <div>
-    <input id="expenseData.shopping" placeholder="Estimated Monthly Shopping cost"/>
-    <select v-model="expenseData.shopping.cost_type" >
-        <option value="flexible">Flexible</option>
-        <option value="fixed">Fixed</option>
-    </select>
-    </div> -->
+</div>
+
 
     <button type="submit" @click="previewInfo()">Submit Form</button>
 </form>
@@ -41,7 +33,7 @@
 <div :v-if="{showPreview}">
     <h1>Please verify that the information provided is correct:</h1><br>
 
-    <h2 v-for="(item,name) in expenseData" :key="name">{{ item.name }} - Est. Monthly Cost: {{item.value }}, Cost Type: {{ item.cost_type }} </h2>
+    <!-- <h2 v-for="(item,name) in expenseData" :key="name">Est. Monthly Cost: {{item.value }}, Cost Type: {{ item.cost_type }} </h2> -->
 
 </div>
 
@@ -51,16 +43,21 @@
 
 import {reactive, ref} from "vue"
 
-
-const expenseData = reactive({
-    groceries: { value:0, cost_type:"fixed"}, 
-    utilities: { value:0, cost_type:"fixed"},
-    shopping: {value:0, cost_type:"fixed"}
+const categories = reactive({
+    category: {name:"", value:0, cost_type:"fixed"}, 
 
 })
-//submit pressed, displayprev = true, it displays, v-else on form and it dissappears
-//button in preview has option to submit(appends data to profile) or edit, which turns the preview off and the form on.
-//repeat with the submit button
+
+
+
+
+
+
+
+
+
+
+
 
 const showPreview = ref("false")
 
@@ -68,6 +65,10 @@ function previewInfo() {
     showPreview.value = "true"
     
 
+
+}
+
+function addCategory() {
 
 }
 
