@@ -28,14 +28,11 @@ export interface QuestionForm {
   isActive?: boolean
 }
 
-export type category  = {
+
+export interface Category  {
   name: string,
-  value: number,
+  limit: number,
   cost_type: CostType,
 
-}
-
-export interface categories {
-  category:category
 }
 

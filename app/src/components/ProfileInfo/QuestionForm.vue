@@ -1,74 +1,76 @@
 <template>
 
-<form>
-    <h1>INCOME & SAVINGS FORM</h1>
-    <input id="p_income" placeholder="Enter Estimated Monthly Income">
-    <input id="s_income" placeholder="Enter Secondary Income">
+<form>   
+    <h1>BASIC INFO</h1>
+    <input placeholder="Full Name"/>
+    <input placeholder="Preferred Name"/>
+    <input placeholder="Age"/>
 
+    <h1>INCOME</h1>
+    <input id="p_income" placeholder="Estimated Monthly Income">
+    <input id="s_income" placeholder="Secondary Income">
+    <input id="deps" placeholder="Number of Dependents">
+    <input placeholder="Debt (optional)">
 
+    <h1>GOALS</h1>
+    <input id="savings_goal" placeholder="MONTHLY SAVINGS GOAL">
+    <input id="spend_goal" placeholder="MONTHYL SPENDING GOAL">
 
-</form>
-
-<form>
     <h1>EXPENSE FORM</h1>
+    <h1>Add Spending Categories</h1>
     <div>
-    <input v-model="expenseData.groceries" placeholder="Estimated Monthly Grocery cost"/>
-    <select v-model="expenseData.groceries.cost_type" >
+    <input id="cat_name" :v-model="newCategory.name" placeholder="Name"/>
+    <input id="spend_limit" :v-model="newCategory.limit" placeholder="Spending Limit"/>
+    <select id="flexiblity" :v-model="newCategory.cost_type" >
         <option value="flex">Flexible</option>
         <option value="fixed">Fixed</option>
     </select>
     </div>
-
-    <div>
-    <input v-model="expenseData.utilities" placeholder="Estimated Monthly Utilities cost"/>
-    <select v-model="expenseData.utilities.cost_type" >
-        <option value="flex">Flexible</option>
-        <option value="fixed">Fixed</option>
-    </select>
-    </div>
-
-    <div>
-    <input id="expenseData.shopping" placeholder="Estimated Monthly Shopping cost"/>
-    <select v-model="expenseData.shopping.cost_type" >
-        <option value="flexible">Flexible</option>
-        <option value="fixed">Fixed</option>
-    </select>
-    </div>
+    <btn @click="addCategory()">Add Category</btn>
+    <btn>Done</btn> 
 
     <button type="submit" @click="previewInfo()">Submit Form</button>
 </form>
 
-<div>
-    <h1>Please verify that the information provided is:</h1><br>
+<div :v-if="{showPreview}" >
+    <h1>Please verify that the information provided is correct:</h1><br>
 
-    <h2>Monthly Gorcery Cost: {{expenseData.groceries.value}} </h2>
-    <h2>Type: {{ expenseData.groceries.cost_type }}</h2> <br>
 
-    <h2>Monthly Utilities Cost: {{expenseData.utilities.value}}</h2>
-    <h2>Type: {{ expenseData.utilities.cost_type }}</h2><br>
-
-    <h2>Monthly Shopping Cost: {{expenseData.shopping.value}}</h2>
-    <h2>Type: {{ expenseData.shopping.cost_type }}</h2><br>
 </div>
 
 </template>
 
 <script setup lang="ts">
-import UserProfile from "./UserProfile.vue";
+import type { Category } from '@/types'
 import {reactive, ref} from "vue"
 
 
-const expenseData = reactive({
-    groceries: { value:0, cost_type:"fixed"}, 
-    utilities: { value:0, cost_type:"fixed"},
-    shopping: {value:0, cost_type:"fixed"}
 
+
+
+//Categories
+const categories = reactive<Category[]>([])
+
+const newCategory = reactive<Category>({
+    name: "",
+    limit:0,
+    cost_type:'fixed'
 })
 
-function previewInfo() {
-
+function addCategory() {
+    categories.push({...newCategory}
+    ) //spread operator that creates a blank copy of that object
+    newCategory.name = "",
+    newCategory.limit = 0,
+    newCategory.cost_type = 'fixed'
 }
 
+//Preview
+const showPreview = ref("false")
 
+function previewInfo() {
+    showPreview.value = "true"
+
+}
 
 </script>

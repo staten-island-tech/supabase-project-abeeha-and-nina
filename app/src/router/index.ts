@@ -6,6 +6,7 @@ import ResetEmail from '@/components/auth/ResetPassword/ResetEmail.vue'
 import DashboardView from '@/views/DashboardView.vue'
 import AuthPage from '@/views/AuthPage.vue'
 import UpdatePassword from "@/components/auth/ResetPassword/UpdatePassword.vue"
+import QuestionForm from '@/components/ProfileInfo/QuestionForm.vue'
 
 const router = createRouter({
   history: createWebHistory('/'),
@@ -54,6 +55,12 @@ const router = createRouter({
       name: 'auth',
       component: AuthPage,
       meta: {requiresAuth: false}
+    },
+    {
+      path: '/questionform',
+      name: 'questionform',
+      component: QuestionForm,
+      meta: {requiresAuth: true}
     },
   ],
 })

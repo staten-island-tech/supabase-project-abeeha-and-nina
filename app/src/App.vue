@@ -4,7 +4,7 @@ import AuthPage from './views/AuthPage.vue';
 import { gsap } from "gsap"
 import { ref, onMounted } from 'vue'
 import { useAuthStore } from './stores/pinia';
-import { supabase } from './supabase'
+import { supabase } from '@/supabase';
 
 const auth = useAuthStore()
 
