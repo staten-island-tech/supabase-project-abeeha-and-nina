@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-//make formDatat a speparate component bc Im gonna need it againa and tis too coplex to be inline
+import UserProfile from "./UserProfile.vue";
 import {reactive, ref} from "vue"
 
 
@@ -66,7 +66,7 @@ const expenseData = reactive({
 })
 
 function previewInfo() {
-    //contianer.innerHTML=""
+
 }
 
 
