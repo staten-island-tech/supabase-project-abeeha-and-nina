@@ -1,16 +1,16 @@
 <template>
-
-<form>   
+<div class="flex place-content-center ">
+    <form>   
     <h1>BASIC INFO</h1>
-    <input placeholder="Full Name"/>
-    <input placeholder="Preferred Name"/>
-    <input placeholder="Age"/>
+    <input placeholder="Full Name"/><br>
+    <input placeholder="Preferred Name"/><br>
+    <input placeholder="Age"/><br>
 
     <h1>INCOME</h1>
-    <input id="p_income" placeholder="Estimated Monthly Income">
-    <input id="s_income" placeholder="Secondary Income">
-    <input id="deps" placeholder="Number of Dependents">
-    <input placeholder="Debt (optional)">
+    <input id="p_income" placeholder="Estimated Monthly Income"><br>
+    <input id="s_income" placeholder="Secondary Income"><br>
+    <input id="deps" placeholder="Number of Dependents"><br>
+    <input placeholder="Debt (optional)"><br>
 
     <h1>GOALS</h1>
     <input id="savings_goal" placeholder="MONTHLY SAVINGS GOAL">
@@ -26,16 +26,17 @@
         <option value="fixed">Fixed</option>
     </select>
     </div>
-    <btn @click="addCategory()">Add Category</btn>
-    <btn>Done</btn> 
-
-    <button type="submit" @click="previewInfo()">Submit Form</button>
+    <btn @click="addCategory()">Add Category</btn><br>
+    <btn>Done</btn> <br>
+    <button type="submit" @click="previewInfo()">Submit Form</button><br>
 </form>
 
 <div :v-if="{showPreview}" >
     <h1>Please verify that the information provided is correct:</h1><br>
-
-
+    <h1 :v-for="newCategory" in categories>
+        {{ newCategory.name}}
+    </h1>
+</div>
 </div>
 
 </template>
@@ -44,7 +45,7 @@
 import type { Category } from '@/types'
 import {reactive, ref} from "vue"
 
-
+//Frm INfo stroe
 
 
 
@@ -74,3 +75,6 @@ function previewInfo() {
 }
 
 </script>
+<style>
+
+</style>

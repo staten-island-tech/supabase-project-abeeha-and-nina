@@ -60,7 +60,7 @@ const router = createRouter({
       path: '/questionform',
       name: 'questionform',
       component: QuestionForm,
-      meta: {requiresAuth: true}
+      meta: {requiresAuth: false}  //Change later, just for testing
     },
   ],
 })
