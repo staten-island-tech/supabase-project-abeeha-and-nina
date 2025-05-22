@@ -5,8 +5,8 @@ export interface User {
     id: number;
     username: string;
     email: string;
-    
   }
+
 
 export interface DashboardView {
   name: string,
@@ -34,5 +34,13 @@ export interface Category  {
   limit: number,
   cost_type: CostType,
 
+}
+
+export interface UserData {
+  pIncome:number,
+  sIncome:number,
+  Deps:number,
+  Age:number,
+  
 }
 

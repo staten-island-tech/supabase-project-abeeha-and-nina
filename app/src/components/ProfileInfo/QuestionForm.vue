@@ -34,18 +34,24 @@
 <div :v-if="{showPreview}" >
     <h1>Please verify that the information provided is correct:</h1><br>
     <h1 :v-for="newCategory" in categories>
-        {{ newCategory.name}}
+        {{ newCategory.name}}: Monthly Limit {{ newCategory.limit }}, Type: {{ newCategory.cost_type }}
     </h1>
+    
 </div>
 </div>
 
 </template>
 
 <script setup lang="ts">
-import type { Category } from '@/types'
+import { type User, type Category } from '@/types'
 import {reactive, ref} from "vue"
 
 //Frm INfo stroe
+
+const UserInfo = reactive<User>({
+    name: "",
+    age
+})
 
 
 
@@ -71,7 +77,6 @@ const showPreview = ref("false")
 
 function previewInfo() {
     showPreview.value = "true"
-
 }
 
 </script>
