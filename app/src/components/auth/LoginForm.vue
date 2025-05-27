@@ -27,7 +27,7 @@ async function signInWithEmail() {
 
 <template>
 <div class="flex justify-center">
-  <div class="bg-base-100 w-1/4 pb-8 pt-6 h-auto border-2 hover:border-4 duration-200 rounded-lg my-5 min-w-64 shadow-lg">
+  <div class="bg-base-100 w-1/4 pb-8 pt-6 h-auto border-2 hover:border-4 duration-200 rounded-lg my-5 min-w-64 shadow-lg bg-base-200">
     <form>
       <h1 class="text-center text-2xl text-neutral my-1 mx-5 font-bold">Login here!</h1>
       <label for="email" class="flex justify-center pt-3">What is your email?</label>
