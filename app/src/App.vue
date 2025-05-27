@@ -26,15 +26,6 @@ async function useAuth() {
     auth.login(data.session.user)
   }
 
-  auth.check.value = true
-
-  supabase.auth.onAuthStateChange((event, session) => {
-    if (session) {
-      auth.login(session.user)
-    } else {
-      auth.logout()
-    }
-  })
 }
 </script>
 
@@ -52,11 +43,9 @@ async function useAuth() {
         class="flex justify-center text-4xl ml-48 px-4 py-4 font-extrabold"
       >
         Welcome to the Finance App!
-      </h1>
-      
+      </h1>     
       <div class="wrapper">
         <div class=" flex justify-center">
-          <div v-if="auth.check">
             <RouterLink
               v-if="!auth.isLoggedIn"
               to="/auth"
@@ -76,7 +65,6 @@ async function useAuth() {
                 </button>
               </div>
             </div>
-          </div>
         </div>
         <br/>
         <RouterView />
