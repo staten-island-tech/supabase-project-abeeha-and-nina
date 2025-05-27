@@ -52,13 +52,16 @@
     <h3>Monthly Savings Goal: {{ UserInfo.sav_goal }}</h3>
     <h3>Monthly Spending Goal: {{ UserInfo.spend_goal }}</h3>
     
+    <button @click="updateProfile()">Yes</button>
+    <button @click="">No</button>
 </div>
 
 </template>
 
 <script setup lang="ts">
 import { type UserData, type Category } from '@/types'
-import {reactive, ref, toRaw} from "vue"
+import {reactive, ref} from "vue"
+import { supabase } from '@/supabase'
 
 //Frm INfo stroe
 
@@ -71,7 +74,6 @@ const UserInfo = reactive<UserData>({
     Debt:null,
     sav_goal:null,
     spend_goal:null,
-
 })
 
 //Categories
@@ -94,6 +96,29 @@ const showInfo = ref<boolean>(false)
 
 function previewInfo() {
     showInfo.value = true
+}
+
+//Append to tables
+async function updateProfile() {
+    const { data, error } = await supabase.from('User Personalized Responses').insert([
+  {
+    primary_income: UserInfo.pIncome,
+    secondary_income:UserInfo.sIncome,
+    Dependents: UserInfo.Deps,
+    Age: UserInfo.Age,
+    savings_goal: UserInfo.sav_goal,
+    spend_goal: UserInfo.spend_goal,
+    debt: UserInfo.Debt,
+  },
+])
+
+if (error) {
+    console.error(error)
+    alert("Error updating profile!")
+}
+if (data) {
+    alert("Profile Updated!")
+}
 }
 
 </script>
