@@ -2,19 +2,21 @@ import type { Component } from "vue";
 
 export interface User {
     name: string,
-    id: number;
+    id: number | null;
     username: string;
     email: string;
   }
 
 
 export interface DashboardView {
+  type:Component,
   name: string,
   isActive?: boolean,
 
 }
 
 export interface RegisterForm {
+  type:Component,
   name: string,
   isActive?: boolean,
 
@@ -26,21 +28,27 @@ export type CostType = "fixed" | "flexible"
 export interface QuestionForm {
   name: string,
   isActive?: boolean
+  type:Component,
+
 }
 
 
 export interface Category  {
   name: string,
-  limit: number,
+  limit: number | null,
   cost_type: CostType,
 
 }
 
-export interface UserData {
-  pIncome:number,
-  sIncome:number,
-  Deps:number,
-  Age:number,
+export interface UserData { //separate from the User interface, which is more for auth stuff
+  nName: string,
+  pIncome:number | null,
+  sIncome:number | null,
+  Deps:number| null,
+  Age:number| null,
+  Debt:number|null,
+  sav_goal:number| null,
+  spend_goal:number| null,
   
 }
 
