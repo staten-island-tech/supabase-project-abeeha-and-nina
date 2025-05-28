@@ -32,20 +32,23 @@ export interface QuestionForm {
 
 }
 
-
 export interface Category  {
   name: string,
-  limit: number | null,
+  budget_percent: percent | null,
   cost_type: CostType,
 
 }
+
+export type percent = number;
+
+export function isPercent(value: number): value is percent {
+  return value >= 1 && value <= 100;  
+} //run this to check eveyr time your working with a percent
 
 export interface UserData { //separate from the User interface, which is more for auth stuff
   nName: string,
   pIncome:number | null,
   sIncome:number | null,
-  Deps:number| null,
-  Age:number| null,
   Debt:number|null,
   sav_goal:number| null,
   spend_goal:number| null,
