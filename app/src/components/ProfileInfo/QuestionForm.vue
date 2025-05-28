@@ -1,6 +1,6 @@
 <template>
-<div class="flex place-content-center ">
-<form @submit.prevent>   
+<div class="flex place-content-center">
+<form class="form" @submit.prevent>   
   <h1>BASIC INFO</h1>
   <input v-model="UserInfo.nName" placeholder="Preferred Name" /><br> 
   <input v-model.number="UserInfo.Age" placeholder="Age" /><br>
@@ -17,9 +17,9 @@
 
     <button type="submit" @click="previewInfo()">Submit Form</button><br>
 </form>
-</div>
 
-<form @submit.prevent>
+
+<form class="form" @submit.prevent>
     <h1>EXPENSE FORM</h1>
     <h1>Add Spending Categories</h1>
     <div>
@@ -34,14 +34,14 @@
     <br>
 </form>
 
-<div>
+<div class="info_container">
     <h1>Spending Categories</h1>
     <h1 v-for="newCategory in categories"  :key="newCategory.name">
         {{ newCategory.name}} - Monthly Limit: {{ newCategory.limit }}, Type: {{ newCategory.cost_type }}
     </h1>
 </div>
 
-<div v-if="showInfo">
+<div v-if="showInfo" class="infocontainer">
     <h1>Please verify that the information provided is correct:</h1><br>
     <h3>Name: {{ UserInfo.nName }}</h3>
     <h3>Age: {{ UserInfo.Age }}</h3>
@@ -55,6 +55,7 @@
     <button @click="updateProfile()">Yes</button>
     <button @click="">No</button>
 </div>
+</div>
 
 </template>
 
@@ -62,6 +63,7 @@
 import { type UserData, type Category } from '@/types'
 import {reactive, ref} from "vue"
 import { supabase } from '@/supabase'
+import { userInfo } from 'node:os'
 
 //Frm INfo stroe
 
@@ -122,6 +124,8 @@ if (data) {
 }
 
 </script>
+
 <style>
+
 
 </style>
