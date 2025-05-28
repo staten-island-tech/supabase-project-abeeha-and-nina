@@ -1,6 +1,5 @@
 <template>
-    <h1>Welcome to the Finance App</h1>
-    <RouterLink to="/questionform">Build My Profile!</RouterLink>
+    <RouterLink to="/questionform">Click Here to Build My Profile!</RouterLink>
 </template>
 
 <script setup lang="ts">

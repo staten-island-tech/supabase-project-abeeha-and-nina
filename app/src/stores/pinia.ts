@@ -1,16 +1,8 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { supabase } from '../supabase'
-import { User } from '@/types'
 
 export const useAuthStore = defineStore('auth', () => {
-
-  state: (): User =>{
-    return{
-      userList: [] as User[],
-      User: null as User | null
-    }
-  }
 
   const isLoggedIn = ref(false)
   const User = ref({})

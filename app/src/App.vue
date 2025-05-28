@@ -5,6 +5,8 @@ import { ref, onMounted } from 'vue'
 import { useAuthStore } from './stores/pinia';
 import ThemeSelector from './components/ThemeSelector.vue'
 import { supabase } from './supabase';
+import LogOut from './components/LogOut.vue';
+import DashboardView from './views/DashboardView.vue';
 
 const auth = useAuthStore()
 
@@ -39,6 +41,7 @@ async function useAuth() {
       <RouterLink to="/" class="cursor-pointer border-primary text-lg px-3 py-3 rounded-lg hover:text-3xl duration-200 border-4 border-solid bg-base-200">Home</RouterLink>
       </div>
       <h1
+        v-if="!auth.isLoggedIn"
         ref="headerRef"
         class="flex justify-center text-4xl ml-48 px-4 py-4 font-extrabold"
       >
@@ -55,14 +58,9 @@ async function useAuth() {
             </RouterLink>
 
             <div v-else class="text-center mt-4">
-              <p class="flex justify-center font-semibold ml-48 px-4 py-4">You are logged in!</p>
-              <div class="flex justify-center">
-                <button
-                  @click="auth.logout"
-                  class="hover:text-xl duration-150 font-medium flex justify-center italic cursor"
-                >
-                  Logout
-                </button>
+             <br/><LogOut/><br/>
+              <div class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">
+                <DashboardView/>
               </div>
             </div>
         </div>
