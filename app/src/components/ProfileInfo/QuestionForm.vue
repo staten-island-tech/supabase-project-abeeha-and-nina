@@ -61,7 +61,6 @@
 import { type UserData, type Category } from '@/types'
 import {reactive, ref} from "vue"
 import { supabase } from '@/supabase'
-import { useAuthStore } from '@/stores/pinia'
 
 //Frm INfo stroe
 
@@ -97,10 +96,13 @@ function previewInfo() {
 }
 
 //Append to tables
+
+const public_id  = await getUserPublicId()
+
 async function updateProfile() {
     const { data, error } = await supabase.from('User Personalized Responses').insert([
   {
-    user_id:useAuthStore.$id,
+    user_id:public_id,
     primary_income: UserInfo.pIncome,
     secondary_income:UserInfo.sIncome,
     savings_goal: UserInfo.sav_goal,

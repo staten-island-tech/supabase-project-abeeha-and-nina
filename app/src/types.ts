@@ -1,8 +1,9 @@
+import type { UUID } from "crypto";
 import type { Component } from "vue";
 
 export interface User {
     name: string,
-    id: number | null;
+    public_id: UUID;
     username: string;
     email: string;
   }
@@ -49,7 +50,7 @@ export interface UserData { //separate from the User interface, which is more fo
   nName: string,
   pIncome:number | null,
   sIncome:number | null,
-  Debt:number|null,
+  Debt:number | null,
   sav_goal:number| null,
   spend_goal:number| null,
   
