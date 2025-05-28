@@ -59,7 +59,7 @@ const registerUser = async () => {
 
 const linkUsers = async (userId) => {
   const { error} = await supabase.from('Users').insert({
-    auth_id: userId,
+    UID: userId,
     email: email.value,
     user_name: name.value,
   })

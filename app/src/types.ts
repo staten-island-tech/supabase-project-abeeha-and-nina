@@ -1,12 +1,23 @@
 import type { UUID } from "crypto";
 import type { Component } from "vue";
 
-export interface User {
+export type User = {
     name: string,
-    public_id: UUID;
-    username: string;
-    email: string;
+    public_id: UUID,
+    username: string,
+    email: string,
+    userId:UUID
+
   }
+
+export interface user_instance {
+  type:User,
+
+}
+
+export interface Data {
+  user: User;
+}
 
 
 export interface DashboardView {
