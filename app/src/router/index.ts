@@ -8,6 +8,7 @@ import AuthPage from '@/views/AuthPage.vue'
 import UpdatePassword from "@/components/auth/ResetPassword/UpdatePassword.vue"
 import QuestionForm from '@/components/ProfileInfo/QuestionForm.vue'
 import LogOut from '@/components/LogOut.vue'
+import { useAuthStore } from '@/stores/pinia'
 
 const router = createRouter({
   history: createWebHistory('/'),
@@ -70,6 +71,15 @@ const router = createRouter({
       meta: {requiresAuth: false}  //Change later, just for testing
     },
   ],
+})
+
+router.beforeEach((to,from,next) => {
+  const auth = useAuthStore()
+  if (to.meta.requiresAuth && !auth.isLoggedIn) {
+    next({path: "/"})
+  } else {
+    next()
+  }
 })
 
 export default router
