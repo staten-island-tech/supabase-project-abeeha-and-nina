@@ -1,8 +1,9 @@
 <template>
-<div class="flex place-content-center">
+<div class="flex place-content-center grid-cols-3 gap-16">
+
 <form class="form" @submit.prevent>   
   <h1>BASIC INFO</h1>
-  <input v-model="UserInfo.nName" placeholder="Preferred Name" /><br> 
+  <input v-model="UserInfo.nName" placeholder="Preferred Name" /><br/>
 
   <h1>INCOME</h1>
   <input v-model.number="UserInfo.pIncome" placeholder="Estimated Monthly Income"><br>
@@ -13,7 +14,8 @@
   <input v-model.number="UserInfo.sav_goal" placeholder="MONTHLY SAVINGS GOAL"><br>
   <input v-model.number="UserInfo.spend_goal" placeholder="OVERALL MONTHLY SPENDING GOAL"><br>
 
-    <button type="submit" @click="previewInfo()">Submit Form</button><br>
+    <button type="submit" @click="previewInfo()" class="font-medium italic cursor-pointer">Submit Form</button><br>
+    <button type=""></button>
 </form>
 
 
@@ -28,7 +30,7 @@
         <option value="fixed">Fixed</option>
     </select>
     </div>
-    <button type="submit" @click="addCategory()">Add Category</button><br>
+    <button type="submit" @click="addCategory()" class="font-medium italic cursor-pointer">Add Category</button><br>
     <br>
 </form>
 
