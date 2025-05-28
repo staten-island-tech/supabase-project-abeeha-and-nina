@@ -1,7 +1,7 @@
 <template>
     <div class="flex justify-center">
       <div class="bg-base-100 w-1/4 pb-8 pt-6 h-auto border-2 hover:border-4 duration-200 rounded-lg my-5 min-w-64 shadow-lg bg-base-200">
-      <h1 class="text-center text-2xl text-neutral my-1 mx-5 font-bold">Register here!</h1>
+      <h1 class="text-center text-2xl my-1 mx-5 font-bold">Register here!</h1>
       <form @submit.prevent="registerUser">
         <label for="name" class="pt-3 flex justify-center pb-2">What is your name?</label>
         <div class="flex justify-center">

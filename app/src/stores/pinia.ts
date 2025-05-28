@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import { supabase } from '../supabase'
 
 export const useAuthStore = defineStore('auth', () => {
+
   const isLoggedIn = ref(false)
   const User = ref({})
   const check = ref(false)
