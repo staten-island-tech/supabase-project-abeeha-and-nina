@@ -61,6 +61,7 @@
 import { type UserData, type Category } from '@/types'
 import {reactive, ref} from "vue"
 import { supabase } from '@/supabase'
+import { useAuthStore } from '@/stores/pinia'
 
 //Frm INfo stroe
 
@@ -99,6 +100,7 @@ function previewInfo() {
 async function updateProfile() {
     const { data, error } = await supabase.from('User Personalized Responses').insert([
   {
+    user_id:useAuthStore.$id,
     primary_income: UserInfo.pIncome,
     secondary_income:UserInfo.sIncome,
     savings_goal: UserInfo.sav_goal,
@@ -112,6 +114,7 @@ if (error) {
     alert("Error updating profile!")
 }
 if (data) {
+    console.log(data);
     alert("Profile Updated!")
 }
 }

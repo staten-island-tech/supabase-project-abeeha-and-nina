@@ -6,6 +6,24 @@ import router from "@/router/index.ts";
 const password = ref('');
 const email = ref("");
 
+export async function getUserPublicId() {
+  const {data: {user}} = await supabase.auth.getUser();
+  if (!user) {
+    return null
+  }
+  else {
+    const {data, error} = await supabase.from("users").select("user_id").eq("UID", user.id).single();
+    if (error) {
+      console.error("unable to get user's public id (user_id)")
+      return null
+    } 
+    else {
+      return data ?.user_id?? null
+    }
+  }
+  
+}
+
 
 async function signInWithEmail() {
   const { data , error } = await supabase.auth.signInWithPassword({
