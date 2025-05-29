@@ -1,8 +1,8 @@
 <template>
 <div class="flex place-content-center grid-cols-3 gap-16">
 
-<form class="form" @submit.prevent>   
-  <h1>BASIC INFO</h1>
+<form class="form bg-base-200 rounded-lg px-32" @submit.prevent>   
+  <h1 class="flex justify-center text-4xl ml-48 px-4 py-4 font-extrabold">BASIC INFO</h1>
   <input v-model="UserInfo.nName" placeholder="Preferred Name" /><br/>
 
   <h1>INCOME</h1>
@@ -13,47 +13,23 @@
   <h1>GOALS (Monthly)</h1>
   <input v-model.number="UserInfo.sav_goal" placeholder="MONTHLY SAVINGS GOAL"><br>
   <input v-model.number="UserInfo.spend_goal" placeholder="OVERALL MONTHLY SPENDING GOAL"><br>
-
     <button type="submit" @click="previewInfo()" class="font-medium italic cursor-pointer">Submit Form</button><br>
-    <button type=""></button>
+    <button type="reset" class="font-medium italic cursor-pointer">Reset Values</button>
 </form>
 
-
-<form class="form" @submit.prevent>
-    <h1>EXPENSE FORM</h1>
-    <h1>Add Spending Categories</h1>
-    <div>
-    <input v-model="newCategory.name" placeholder="Name"/>
-    <input v-model="newCategory.budget_percent" placeholder="Spending budget_percent"/>
-    <select v-model="newCategory.cost_type" >
-        <option value="flex">Flexible</option>
-        <option value="fixed">Fixed</option>
-    </select>
-    </div>
-    <button type="submit" @click="addCategory()" class="font-medium italic cursor-pointer">Add Category</button><br>
-    <br>
-</form>
-
-<div class="info_container">
-    <h1>Spending Categories</h1>
-    <h1 v-for="newCategory in categories"  :key="newCategory.name">
-        {{ newCategory.name}} - Monthly budget_percent
-: {{ newCategory.budget_percent
- }}, Type: {{ newCategory.cost_type }}
-    </h1>
-</div>
-
-<div v-if="showInfo" class="infocontainer">
-    <h1>Please verify that the information provided is correct:</h1><br>
+<div v-if="showInfo" class="infocontainer bg-base-200 rounded-lg px-16">
+    <h1 class="flex justify-center text-4xl ml-48 px-4 py-4 font-extrabold">Please verify that the information provided is correct:</h1><br>
     <h3>Name: {{ UserInfo.nName }}</h3>
     <h3>Estimated Monthly Income: {{ UserInfo.pIncome }}</h3>
     <h3>Secondary Income: {{ UserInfo.sIncome ?? "None" }}</h3>
     <h3>Debt: {{ UserInfo.Debt ?? "None" }}</h3>
     <h3>Monthly Savings Goal: {{ UserInfo.sav_goal }}</h3>
-    <h3>Monthly Spending Goal: {{ UserInfo.spend_goal }}</h3>
+    <h3>Monthly Spending Goal: {{ UserInfo.spend_goal }}</h3><br/>
     
-    <button @click="updateProfile()">Yes</button>
-    <button @click="">No</button>
+    <div class="grid grid-cols-2">
+        <button @click="updateProfile()" class="font-medium italic cursor-pointer">Yes</button>
+        <button @click="" class="font-medium italic cursor-pointer">No</button>
+    </div>
 </div>
 </div>
 
@@ -75,21 +51,6 @@ const UserInfo = reactive<UserData>({
     spend_goal:null,
 })
 
-//Categories
-const categories = reactive<Category[]>([])
-
-const newCategory = reactive<Category>({
-    name: "",
-    budget_percent:null,
-    cost_type:'fixed'
-})
-
-function addCategory() {
-    categories.push({...(newCategory)})
-    newCategory.name = ""
-    newCategory.budget_percent = null
-    newCategory.cost_type = "fixed"
-}
 
 const showInfo = ref<boolean>(false)
 
