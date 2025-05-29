@@ -14,7 +14,7 @@
     <br>
 </form>
 
-<div class="info_container">
+<div v-if="previewInfo" class="info_container">
     <h1>Spending Categories</h1>
     <h1 v-for="newCategory in categories"  :key="newCategory.name">
         {{ newCategory.name}} - Monthly budget_percent
@@ -24,7 +24,7 @@
 </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { type UserData, type Category } from '@/types'
 import {reactive, ref} from "vue"
 
