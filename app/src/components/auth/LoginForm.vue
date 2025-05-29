@@ -39,7 +39,7 @@ async function signInWithEmail() {
       <div class="flex justify-center">
         <input class="text-center" placeholder="Password" type="password" id="password" v-model="password">
       </div>
-      <div class="flex justify-center pt-3 hover:text-xl duration-200 font-medium italic">
+      <div class="flex justify-center pt-3 hover:text-xl duration-200 font-medium italic cursor-pointer">
         <input type="submit" @click="signInWithEmail()"></input>
       </div>
     </form>
