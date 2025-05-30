@@ -14,7 +14,7 @@
     <br>
 </form>
 
-<div v-if="previewInfo" class="info_container">
+<div class="info_container">
     <h1>Spending Categories</h1>
     <h1 v-for="newCategory in categories"  :key="newCategory.name">
         {{ newCategory.name}} - Monthly budget_percent
@@ -43,9 +43,5 @@ function addCategory() {
     newCategory.cost_type = "fixed"
 }
 
-const showInfo = ref<boolean>(false)
 
-function previewInfo() {
-    showInfo.value = true
-}
 </script>

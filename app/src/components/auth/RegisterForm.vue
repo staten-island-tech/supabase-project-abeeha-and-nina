@@ -40,12 +40,12 @@ const registerUser = async () => {
   const { data, error } = await supabase.auth.signUp({
     email: email.value,
     password: password.value,
-    options: {
+     options: {
       data: {
         name: name.value,
         confirmation_sent_at: Date.now(),
       }
-    }
+    } 
   })
   if (error) alert(error.message);
   else{
