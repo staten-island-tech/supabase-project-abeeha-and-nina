@@ -69,18 +69,18 @@ const router = createRouter({
       path: '/questionform',
       name: 'questionform',
       component: QuestionForm,
-      meta: {requiresAuth: false}  //Change later, just for testing
+      meta: {requiresAuth: true}  //Change later, just for testing
     },    
     {
       path: '/expenseform',
       name: 'expenseform',
       component: ExpenseForm,
-      meta: {requiresAuth: false}  //Change later, just for testing
+      meta: {requiresAuth: true}  //Change later, just for testing
     },
   ],
 })
 
-router.beforeEach((to,from,next) => {
+router.beforeEach((to, from, next) => {
   const auth = useAuthStore()
   if (to.meta.requiresAuth && !auth.isLoggedIn) {
     next({path: "/"})
