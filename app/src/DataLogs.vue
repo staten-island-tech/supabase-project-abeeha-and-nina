@@ -6,6 +6,8 @@
 
     </div>
     <button>Add Additional Earnings</button>
+
+    
 </template>
 
 <script setup>
