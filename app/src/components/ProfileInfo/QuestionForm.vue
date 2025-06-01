@@ -17,6 +17,8 @@
     <button type="reset" class="font-medium italic cursor-pointer">Reset Values</button>
 </form>
 
+
+
 <div v-if="showInfo" class="info_container bg-base-200 rounded-lg px-16">
     <h1 class="flex justify-center text-4xl ml-48 px-4 py-4 font-extrabold">Please verify that the information provided is correct:</h1><br>
     <h3>Name: {{ UserInfo.nName }}</h3>

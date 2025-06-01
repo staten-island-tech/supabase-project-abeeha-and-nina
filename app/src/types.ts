@@ -43,6 +43,12 @@ export interface QuestionForm {
   type:Component,
 
 }
+export interface DataLogs {
+  name: string,
+  isActive?: boolean
+  type:Component,
+
+}
 
 export interface Category  {
   name: string,

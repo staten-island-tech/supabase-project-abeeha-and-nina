@@ -10,6 +10,7 @@ import QuestionForm from '@/components/ProfileInfo/QuestionForm.vue'
 import LogOut from '@/components/LogOut.vue'
 import { useAuthStore } from '@/stores/pinia'
 import ExpenseForm from '@/components/ProfileInfo/ExpenseForm.vue'
+import LogData from '@/components/LogData.vue'
 
 const router = createRouter({
   history: createWebHistory('/'),
@@ -75,6 +76,12 @@ const router = createRouter({
       path: '/expenseform',
       name: 'expenseform',
       component: ExpenseForm,
+      meta: {requiresAuth: false}  //Change later, just for testing
+    },
+      {
+      path: '/datalogs',
+      name: 'datalogs',
+      component: LogData,
       meta: {requiresAuth: false}  //Change later, just for testing
     },
   ],
