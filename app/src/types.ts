@@ -15,7 +15,7 @@ export interface user_instance {
 
 }
 
-export interface Data {
+export interface data {
   user: User;
 }
 
@@ -38,6 +38,12 @@ export interface RegisterForm {
 export type CostType = "fixed" | "flexible"
 
 export interface QuestionForm {
+  name: string,
+  isActive?: boolean
+  type:Component,
+
+}
+export interface DataLogs {
   name: string,
   isActive?: boolean
   type:Component,

@@ -40,20 +40,22 @@ const registerUser = async () => {
   const { data, error } = await supabase.auth.signUp({
     email: email.value,
     password: password.value,
-    options: {
+     options: {
       data: {
         name: name.value,
         confirmation_sent_at: Date.now(),
       }
-    }
+    } 
   })
   if (error) alert(error.message);
-  else{
-    alert('You are now registered in the Finance App!');
+  else if (data.user) {
+        alert('You are now registered in the Finance App!');
     await linkUsers(data.user.id);
     auth.login();
     router.push("/");
-
+  }
+  else{
+      console.error('Unexpected: data.user is null even though no error occurred');
   }
 }
 
@@ -65,22 +67,22 @@ const linkUsers = async (userId) => {
   })
 }
 
-// export async function getUserPublicId() {
-//   const {data: {user}} = await supabase.auth.getUser();
-//   if (!user) {
-//     return null
-//   }
-//   else {
-//     const {data, error} = await supabase.from("users").select("user_id").eq("UID", user.id).single();
-//     if (error) {
-//       console.error("unable to get user_id")
-//       return null
-//     } 
-//     else {
-//       return data ?.user_id?? null
-//     }
-//   }
+ async function getUserPublicId() {
+  const {data: {user}} = await supabase.auth.getUser();
+  if (!user) {
+    return null
+  }
+  else {
+    const {data, error} = await supabase.from("users").select("user_id").eq("UID", user.id).single();
+    if (error) {
+      console.error("unable to get user_id")
+      return null
+    } 
+    else {
+      return data ?.user_id?? null
+    }
+  }
   
-// }
+}
 
 </script>
