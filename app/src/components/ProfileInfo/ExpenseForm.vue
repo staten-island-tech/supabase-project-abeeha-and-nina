@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts" setup>
-import { type UserData, type Category } from '@/types'
+import { type UserData, type Category } from '@/types.ts'
 import {reactive, ref} from "vue"
 
 const categories = reactive<Category[]>([])

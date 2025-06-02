@@ -6,9 +6,9 @@
 
     </div>
     <button>Add Additional Earnings</button>
-    <!-- <AutoComplete v-model="selectedCategory" :suggestions="categories">
+    <AutoComplete v-model="selectedCategory" :suggestions="categories">
     
-</AutoComplete> -->
+</AutoComplete>
 
     
 </template>
