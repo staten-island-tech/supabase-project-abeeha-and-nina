@@ -1,27 +1,34 @@
 <script setup lang="ts">
-import {supabase} from "../../supabase.ts"
+import {supabase} from "../../supabase"
 import { ref } from 'vue'
-import router from "@/router/index.ts";
+import { useRouter } from "vue-router";
+import { useAuthStore } from "@/stores/pinia.ts";
 
 const password = ref('');
 const email = ref("");
+const auth = useAuthStore;
+const router = useRouter;
 
-async function signInWithEmail() {
+const logInUser = async() =>{
   const { data , error } = await supabase.auth.signInWithPassword({
     email: email.value,
     password: password.value,
     }
 )
-  if (error) {
-    console.error(error);
-    alert('Invalid email or password');
-  }
-  else {
-    console.log(data);
+  if (error) alert (error.message);
+  else if (data.user){
     alert("Logged in successfully!");
-    router.push("/dashboard")
+    auth.login();
+    router.push("/")
   }
+  else{
+    console.log(error);
   }
+}
+
+const checkUsers = async (userId: string) => {
+  const 
+}
 
 
 </script>
@@ -29,7 +36,7 @@ async function signInWithEmail() {
 <template>
 <div class="flex justify-center">
   <div class="bg-base-100 w-1/4 pb-8 pt-6 h-auto border-2 hover:border-4 duration-200 rounded-lg my-5 min-w-64 shadow-lg bg-base-200">
-    <form @submit.prevent="signInWithEmail">
+    <form @submit.prevent="logInUser">
       <h1 class="text-center text-2xl my-1 mx-5 font-bold">Login here!</h1>
       <label for="email" class="flex justify-center pt-3">What is your email?</label>
       <div class="flex justify-center">

@@ -78,13 +78,13 @@ const linkUsers = async (userId: string) => {
     return null
   }
   else {
-    const {data, error} = await supabase.from("users").select("user_id").eq("UID", user.id).single();
+    const {data, error} = await supabase.from("users").select("id").eq("UID", user.id).single();
     if (error) {
       console.error("unable to get user_id")
       return null
     } 
     else {
-      return data ?.user_id?? null
+      return data ?.id?? null
     }
   }
   
