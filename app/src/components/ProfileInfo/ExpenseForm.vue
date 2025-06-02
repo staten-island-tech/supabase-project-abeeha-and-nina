@@ -14,6 +14,8 @@
     <button type="submit" @click="addCategory()" class="font-medium italic cursor-pointer">Add Category</button><br>
     <br>
 </form>
+
+<button @click="getUserPublicId()">Test ID</button>
 </div>
 
 
@@ -30,6 +32,7 @@
 <script lang="ts" setup>
 import { type UserData, type Category } from '@/types.ts'
 import {reactive, ref} from "vue"
+import { supabase } from '@/supabase'
 
 const categories = reactive<Category[]>([])
 
@@ -44,6 +47,24 @@ function addCategory() {
     newCategory.name = ""
     newCategory.budget_percent = null
     newCategory.cost_type = "fixed"
+}
+
+async function getUserPublicId() {
+  const {data: {user}} = await supabase.auth.getUser();
+  if (!user) {
+    return null
+  }
+  else {
+    const {data, error} = await supabase.from("users").select("user_id").eq("UID", user.id).single();
+    if (error) {
+      console.error("unable to get user_id")
+      return null
+    } 
+    else {
+      return data ?.user_id?? null
+    }
+  }
+  
 }
 
 </script>
