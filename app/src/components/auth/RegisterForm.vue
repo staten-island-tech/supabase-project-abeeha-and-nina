@@ -55,17 +55,22 @@ const registerUser = async () => {
     router.push("/");
   }
   else{
-      console.error('Unexpected: data.user is null even though no error occurred');
+      console.log(error);
   }
 }
 
-const linkUsers = async (userId) => {
-  const { error} = await supabase.from('Users').insert({
-    UID: userId,
+const linkUsers = async (userId: string) => {
+  const { error } = await supabase.from('users').upsert({
+    id: userId,
     email: email.value,
-    user_name: name.value,
-  })
-}
+    username: name.value,
+  });
+
+  if (error) {
+    console.error( error.message, error.details);
+    alert( error.message);
+  }
+};
 
  async function getUserPublicId() {
   const {data: {user}} = await supabase.auth.getUser();

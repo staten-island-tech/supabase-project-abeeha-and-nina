@@ -29,7 +29,7 @@ async function signInWithEmail() {
 <template>
 <div class="flex justify-center">
   <div class="bg-base-100 w-1/4 pb-8 pt-6 h-auto border-2 hover:border-4 duration-200 rounded-lg my-5 min-w-64 shadow-lg bg-base-200">
-    <form>
+    <form @submit.prevent="signInWithEmail">
       <h1 class="text-center text-2xl my-1 mx-5 font-bold">Login here!</h1>
       <label for="email" class="flex justify-center pt-3">What is your email?</label>
       <div class="flex justify-center">
@@ -40,7 +40,7 @@ async function signInWithEmail() {
         <input class="text-center" placeholder="Password" type="password" id="password" v-model="password">
       </div>
       <div class="flex justify-center pt-3 hover:text-xl duration-200 font-medium italic cursor-pointer">
-        <input type="submit" @click="signInWithEmail()"></input>
+        <input type="submit" value="Log In"></input>
       </div>
     </form>
     <RouterLink to="/reset" class="flex justify-center pt-3 hover:text-xl duration-200 font-medium italic"
