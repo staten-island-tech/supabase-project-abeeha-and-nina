@@ -73,3 +73,5 @@ export interface UserData { //separate from the User interface, which is more fo
   
 }
 
+//LogData
+

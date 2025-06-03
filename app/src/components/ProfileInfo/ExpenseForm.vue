@@ -26,6 +26,7 @@
 : {{ newCategory.budget_percent
  }}, Type: {{ newCategory.cost_type }}
     </h1>
+    <button @click="append_toProf()">Add to Profile!</button>
 </div>
 </template>
 
@@ -66,5 +67,19 @@ async function getUserPublicId() {
   }
   
 }
+
+async function append_toProf() {
+    const { error } = await supabase.from('expenses').insert([{
+    category_name: newCategory.name,
+    budget_percent: newCategory.budget_percent,
+    cost_type: newCategory.cost_type
+  }])
+
+  if (error) {
+    console.error(error)
+    return
+  }
+}
+
 
 </script>
