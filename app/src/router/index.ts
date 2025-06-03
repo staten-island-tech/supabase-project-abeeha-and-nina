@@ -10,7 +10,7 @@ import QuestionForm from '@/components/ProfileInfo/QuestionForm.vue'
 import LogOut from '@/components/LogOut.vue'
 import { useAuthStore } from '@/stores/pinia'
 import ExpenseForm from '@/components/ProfileInfo/ExpenseForm.vue'
-import LogData from '@/components/Logs/LogData.vue'
+import LogData from '@/components/Tables/LogData.vue'
 
 const router = createRouter({
   history: createWebHistory('/'),
