@@ -48,6 +48,10 @@ function add_Option() {
 
 //need to access the content of categories from supabase, and store it initially in expenseform
 
+function getCategories() {
+    //for rowsmatching public-id of user, get the names fo l
+}
+
 </script>
 
 <style lang="ts" scoped>
