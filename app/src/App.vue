@@ -9,6 +9,7 @@ import LogOut from './components/LogOut.vue';
 import DashboardView from './views/DashboardView.vue';
 
 const auth = useAuthStore()
+const username = ref("")
 
 const headerRef = ref<HTMLElement | null>(null)
 
@@ -25,10 +26,24 @@ onMounted(() => {
 async function useAuth() {
   const { data } = await supabase.auth.getSession()
   if (data.session) {
-    auth.login(data.session.user)
-  }
+    const user = data.session.user;
 
+    auth.login(data.session.user)
+    await getUsername(user.id);        
+  }
 }
+
+const getUsername = async (userId: string)=>{
+  const{ data, error } = await supabase.from('users').select('username').eq('id', userId).maybeSingle();
+  
+  if (error){
+    alert(error.message);
+  }
+  else if(data){
+    username.value = data.username
+    
+  }
+  }
 </script>
 
 <template>
@@ -58,6 +73,7 @@ async function useAuth() {
             </RouterLink>
 
             <div v-else class="text-center mt-4">
+              <br/><h1>Welcome {{ username }}</h1>
              <br/><LogOut/><br/>
               <div class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">
                 <DashboardView/>

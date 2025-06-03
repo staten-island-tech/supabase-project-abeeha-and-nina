@@ -1,7 +1,7 @@
 <template>
 <div class="flex place-content-center grid-cols-3 gap-16">
 
-<form class="form bg-base-200 rounded-lg px-32" @submit.prevent>   
+<form v-if="showUser" class="form bg-base-200 rounded-lg px-32 py-5" @submit.prevent>   
   <h1 class="flex justify-center text-4xl ml-48 px-4 py-4 font-extrabold">BASIC INFO</h1>
   <input v-model="UserInfo.nName" placeholder="Preferred Name" /><br/>
 
@@ -13,11 +13,13 @@
   <h1>GOALS (Monthly)</h1>
   <input v-model.number="UserInfo.sav_goal" placeholder="MONTHLY SAVINGS GOAL"><br>
   <input v-model.number="UserInfo.spend_goal" placeholder="OVERALL MONTHLY SPENDING GOAL"><br>
+  <div class="flex justify-center">
     <button type="submit" @click="previewInfo()" class="font-medium italic cursor-pointer">Submit Form</button><br>
+  </div>  
+  <div class="flex justify-center">
     <button type="reset" class="font-medium italic cursor-pointer">Reset Values</button>
+  </div>
 </form>
-
-
 
 <div v-if="showInfo" class="info_container bg-base-200 rounded-lg px-16">
     <h1 class="flex justify-center text-4xl ml-48 px-4 py-4 font-extrabold">Please verify that the information provided is correct:</h1><br>
@@ -29,9 +31,13 @@
     <h3>Monthly Spending Goal: {{ UserInfo.spend_goal }}</h3><br/>
     
     <div class="grid grid-cols-2">
-        <button @click="updateProfile()" class="font-medium italic cursor-pointer">Yes</button>
-        <button @click="" class="font-medium italic cursor-pointer">No</button>
+        <button type="button" @click="updateProfile()" class="font-medium italic cursor-pointer">Yes</button>
+        <button type="button" @click="showInfo = false" class="font-medium italic cursor-pointer">No</button>
     </div>
+</div>
+
+<div v-if="showExpenses" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">
+    <RouterLink to="/expenseform">Click Here to Organize My Expenses!</RouterLink>
 </div>
 </div>
 
@@ -41,6 +47,7 @@
 import { type UserData, type Category } from '@/types'
 import {reactive, ref} from "vue"
 import { supabase } from '@/supabase'
+import router from '@/router'
 
 //Frm INfo stroe
 
@@ -55,6 +62,10 @@ const UserInfo = reactive<UserData>({
 
 
 const showInfo = ref<boolean>(false)
+const showUser = ref<boolean>(true)
+const showExpenses = ref<boolean>(false)
+
+
 
 function previewInfo() {
     showInfo.value = true
@@ -65,30 +76,28 @@ function previewInfo() {
 // const public_id  = await getUserPublicId()
 
 async function updateProfile() {
-    const { data, error } = await supabase.from('User Personalized Responses').insert([
-  {
-    // user_id:public_id,
-    primary_income: UserInfo.pIncome,
-    secondary_income:UserInfo.sIncome,
-    savings_goal: UserInfo.sav_goal,
-    spend_goal: UserInfo.spend_goal,
-    debt: UserInfo.Debt,
-  },
-])
-
-if (error) {
-    console.error(error)
-    alert("Error updating profile!")
-}
-if (data) {
-    console.log(data);
-    alert("Profile Updated!")
-}
+    const user = (await supabase.auth.getUser()).data.user;
+      if (user) {
+        const { data, error } = await supabase.from('user_personalized_responses').upsert([
+        {
+            user_id: user.id,
+            primary_income: UserInfo.pIncome,
+            secondary_income:UserInfo.sIncome,
+            savings_goal: UserInfo.sav_goal,
+            spend_goal: UserInfo.spend_goal,
+            debt: UserInfo.Debt,
+        },
+        ])
+        if (error) {
+            alert("Error updating profile!")
+        }
+        else{
+            alert("Profile Updated!")
+            showInfo.value = false
+            showUser.value = false
+            showExpenses.value = true
+        }
+    }
 }
 
 </script>
-
-<style>
-
-
-</style>

@@ -72,6 +72,22 @@ const linkUsers = async (userId: string) => {
   }
 };
 
-
+ async function getUserPublicId() {
+  const {data: {user}} = await supabase.auth.getUser();
+  if (!user) {
+    return null
+  }
+  else {
+    const {data, error} = await supabase.from("users").select("id").eq("UID", user.id).single();
+    if (error) {
+      console.error("unable to get user_id")
+      return null
+    } 
+    else {
+      return data ?.id?? null
+    }
+  }
+  
+}
 
 </script>
