@@ -6,8 +6,8 @@ import { useAuthStore } from "@/stores/pinia.ts";
 
 const password = ref('');
 const email = ref("");
-const auth = useAuthStore;
-const router = useRouter;
+const auth = useAuthStore();
+const router = useRouter();
 
 const logInUser = async() =>{
   const { data , error } = await supabase.auth.signInWithPassword({
@@ -25,11 +25,6 @@ const logInUser = async() =>{
     console.log(error);
   }
 }
-
-const checkUsers = async (userId: string) => {
-  const 
-}
-
 
 </script>
 
