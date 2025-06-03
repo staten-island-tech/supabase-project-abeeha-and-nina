@@ -24,12 +24,14 @@
 : {{ newCategory.budget_percent
  }}, Type: {{ newCategory.cost_type }}
     </h1>
+    <button @click="append_toProf()">Add to Profile!</button>
 </div>
 </template>
 
 <script lang="ts" setup>
 import { type UserData, type Category } from '@/types.ts'
 import {reactive, ref} from "vue"
+import { supabase } from '@/supabase'
 
 const categories = reactive<Category[]>([])
 
@@ -45,5 +47,19 @@ function addCategory() {
     newCategory.budget_percent = null
     newCategory.cost_type = "fixed"
 }
+
+async function append_toProf() {
+    const { error } = await supabase.from('categories').insert([{
+    name: newCategory.name,
+    budget_percent: newCategory.budget_percent,
+    flexibility: newCategory.cost_type
+  }])
+
+  if (error) {
+    console.error(error)
+    return
+  }
+}
+
 
 </script>
