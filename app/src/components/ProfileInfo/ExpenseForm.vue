@@ -49,10 +49,10 @@ function addCategory() {
 }
 
 async function append_toProf() {
-    const { error } = await supabase.from('categories').insert([{
-    name: newCategory.name,
+    const { error } = await supabase.from('expenses').insert([{
+    category_name: newCategory.name,
     budget_percent: newCategory.budget_percent,
-    flexibility: newCategory.cost_type
+    cost_type: newCategory.cost_type
   }])
 
   if (error) {
