@@ -19,6 +19,9 @@
   <div class="flex justify-center">
     <button type="reset" class="font-medium italic cursor-pointer">Reset Values</button>
   </div>
+  <div class="flex justify-center">
+    <RouterLink to="/" class="font-medium italic cursor-pointer"> Go Back </RouterLink>
+  </div>
 </form>
 
 <div v-if="showInfo" class="info_container bg-base-200 rounded-lg px-16">
@@ -36,9 +39,6 @@
     </div>
 </div>
 
-<div v-if="showExpenses" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">
-    <RouterLink to="/expenseform">Click Here to Organize My Expenses!</RouterLink>
-</div>
 </div>
 
 </template>
@@ -63,9 +63,7 @@ const UserInfo = reactive<UserData>({
 
 const showInfo = ref<boolean>(false)
 const showUser = ref<boolean>(true)
-const showExpenses = ref<boolean>(false)
-
-
+const userState = ref<boolean>(false)
 
 function previewInfo() {
     showInfo.value = true
@@ -95,7 +93,8 @@ async function updateProfile() {
             alert("Profile Updated!")
             showInfo.value = false
             showUser.value = false
-            showExpenses.value = true
+            userState.value = true
+            router.push("expenseform")
         }
     }
 }

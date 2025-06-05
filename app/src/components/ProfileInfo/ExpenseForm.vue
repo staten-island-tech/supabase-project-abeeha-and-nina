@@ -11,22 +11,23 @@
         <option value="fixed">Fixed</option>
     </select>
     </div>
-    <button type="submit" @click="addCategory()" class="font-medium italic cursor-pointer">Add Category</button><br>
-    <br>
+    <button type="submit" @click="addCategory(), showTab = true" class="font-medium italic cursor-pointer">Add Category</button><br>
+    <br/>
 </form>
 
 <button @click="getUserPublicId()">Test ID</button>
-</div>
-
-
-<div class="info_container">
-    <h1>Spending Categories</h1>
-    <h1 v-for="newCategory in categories"  :key="newCategory.name">
-        {{ newCategory.name}} - Monthly budget_percent
-: {{ newCategory.budget_percent
- }}, Type: {{ newCategory.cost_type }}
-    </h1>
-    <button @click="append_toProf()">Add to Profile!</button>
+</div><br/>
+<div class="flex justify-center" v-if="showTab">
+  <div class="info_container bg-base-200 rounded-lg px-4 py-6 max-w-3xl mx-auto">
+      <h1 class="flex justify-center">SPENDING CATEGORIES</h1><br/>
+      <h1 v-for="newCategory in categories"  :key="newCategory.name">
+          {{ newCategory.name}} - Monthly budget_percent
+  : {{ newCategory.budget_percent
+  }}, Type: {{ newCategory.cost_type }}
+      </h1>
+      <button @click="append_toProf()" class="font-medium italic cursor-pointer">Add to Profile!</button><br/>
+      <button @click="removeTab()" type="reset" class="font-medium italic cursor-pointer">Remove</button>
+  </div>
 </div>
 </template>
 
@@ -35,6 +36,11 @@ import { type UserData, type Category } from '@/types.ts'
 import {reactive, ref} from "vue"
 import { supabase } from '@/supabase'
 
+const showTab = ref<boolean>(true)
+function removeTab(){
+  showTab.value = false
+  categories.splice(0, categories.length) 
+}
 const categories = reactive<Category[]>([])
 
 const newCategory = reactive<Category>({

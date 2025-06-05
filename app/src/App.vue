@@ -75,9 +75,7 @@ const getUsername = async (userId: string)=>{
             <div v-else class="text-center mt-4">
               <br/><h1>Welcome {{ username }}</h1>
              <br/><LogOut/><br/>
-              <div class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">
                 <DashboardView/>
-              </div>
             </div>
         </div>
         <br/>
