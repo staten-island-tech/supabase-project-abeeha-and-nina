@@ -65,11 +65,6 @@ const showInfo = ref<boolean>(false)
 const showUser = ref<boolean>(true)
 const userState = ref<boolean>(false)
 
-function returnFormState(){
-  
-    
-}
-
 function previewInfo() {
     showInfo.value = true
 }
@@ -99,6 +94,7 @@ async function updateProfile() {
             showInfo.value = false
             showUser.value = false
             userState.value = true
+            router.push("expenseform")
         }
     }
 }
