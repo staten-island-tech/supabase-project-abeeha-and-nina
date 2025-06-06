@@ -12,6 +12,7 @@
     </select>
     </div>
     <button type="submit" @click="addCategory(), showTab = true" class="font-medium italic cursor-pointer">Add Category</button><br>
+    <button type="reset" class="font-medium italic cursor-pointer">Reset Values</button>
     <br/>
 </form>
 
@@ -35,8 +36,9 @@
 import { type UserData, type Category } from '@/types.ts'
 import {reactive, ref} from "vue"
 import { supabase } from '@/supabase'
+import router from '@/router'
 
-const showTab = ref<boolean>(true)
+const showTab = ref<boolean>(false)
 function removeTab(){
   showTab.value = false
   categories.splice(0, categories.length) 
@@ -51,9 +53,7 @@ const newCategory = reactive<Category>({
 
 function addCategory() {
     categories.push({...(newCategory)})
-    newCategory.name = ""
-    newCategory.budget_percent = null
-    newCategory.cost_type = "fixed"
+
 }
 
 async function getUserPublicId() {
@@ -75,17 +75,21 @@ async function getUserPublicId() {
 }
 
 async function append_toProf() {
-    const { error } = await supabase.from('expenses').insert([{
-    category_name: newCategory.name,
-    budget_percent: newCategory.budget_percent,
-    cost_type: newCategory.cost_type
-  }])
-
+  const user = (await supabase.auth.getUser()).data.user;
+  if (user) {
+    const { data, error } = await supabase.from('expenses').upsert([{
+      user_id: user.id,
+      category_name: newCategory.name,
+      budget_percent: newCategory.budget_percent,
+      cost_type: newCategory.cost_type
+    },
+  ])
   if (error) {
-    console.error(error)
-    return
+    alert("Error updating expenses!")
+  }else{
+    alert("Profile Updated!")
+    showTab.value = false //after here add a button for the user to be finish updating expenses which then reroutes to hoem
+  }
   }
 }
-
-
 </script>

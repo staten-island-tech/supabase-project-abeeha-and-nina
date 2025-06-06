@@ -94,7 +94,7 @@ async function updateProfile() {
             showInfo.value = false
             showUser.value = false
             userState.value = true
-            router.push("expenseform")
+            router.push("/")
         }
     }
 }
