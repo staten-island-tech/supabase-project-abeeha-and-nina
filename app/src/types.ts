@@ -1,22 +1,18 @@
-import type { UUID } from "crypto";
 import type { Component } from "vue";
 
-export type User = {
+export interface AppUser {
     name: string,
-    public_id: UUID,
+    publicId: string,
     username: string,
     email: string,
-    userId:UUID
+    userId:string
 
   }
 
-export interface user_instance {
-  type:User,
 
-}
 
 export interface data {
-  user: User;
+  user: AppUser;
 }
 
 
@@ -63,7 +59,7 @@ export function isPercent(value: number): value is percent {
   return value >= 1 && value <= 100;  
 } //run this to check eveyr time your working with a percent
 
-export interface UserData { //separate from the User interface, which is more for auth stuff
+export interface UserData { //separate from the AppUser interface, which is more for auth stuff
   nName: string,
   pIncome:number | null,
   sIncome:number | null,

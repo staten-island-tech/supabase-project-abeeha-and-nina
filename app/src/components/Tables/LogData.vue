@@ -33,6 +33,11 @@ import AutoComplete from 'primevue/autocomplete';
 import type { Category } from "@/types";
 import Button from "primevue/button";
 import ExpenseForm from "../ProfileInfo/ExpenseForm.vue";
+import { supabase } from "@/supabase";
+import { useAuthStore } from '@/stores/pinia'
+
+const auth = useAuthStore()
+const currentUser = auth.currentUser
 
 const selectedCategory = ref("")
 
@@ -48,9 +53,13 @@ function add_Option() {
 
 //need to access the content of categories from supabase, and store it initially in expenseform
 
-function getCategories() {
-    //for rowsmatching public-id of user, get the names fo l
-}
+async function getCategories() {
+    const { data, error } = await supabase
+  .from('expenses')
+  .select("category_name")
+   .eq('user_id', currentUser.publicId) //make public_id a variable avaiable everywhere
+
+    }
 
 </script>
 

@@ -28,6 +28,7 @@ import { ref } from 'vue'
 import {supabase} from "../../supabase"
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../../stores/pinia'
+import type { AppUser } from '@/types'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -51,12 +52,14 @@ const registerUser = async () => {
   else if (data.user) {
         alert('You are now registered in the Finance App!');
     await linkUsers(data.user.id);
+    //await getUserPublicId()
     auth.login();
     router.push("/");
   }
   else{
       console.log(error);
   }
+
 }
 
 const linkUsers = async (userId: string) => {
@@ -64,30 +67,28 @@ const linkUsers = async (userId: string) => {
     id: userId,
     email: email.value,
     username: name.value,
-  });
+  }, {
+      onConflict: 'id', //this tells supabase to update the existing row if its already there
+    }
+    );
 
   if (error) {
     console.error( error.message, error.details);
     alert( error.message);
   }
+   const { data: row, error: fetchError } = await supabase
+    .from('users')
+    .select('public_id')
+    .eq('id', userId)
+    .single();
+
+  if (fetchError) {
+    console.error(fetchError.message);
+    return null;
+  }
+
+  return row.public_id;
 };
 
- async function getUserPublicId() {
-  const {data: {user}} = await supabase.auth.getUser();
-  if (!user) {
-    return null
-  }
-  else {
-    const {data, error} = await supabase.from("users").select("id").eq("UID", user.id).single();
-    if (error) {
-      console.error("unable to get user_id")
-      return null
-    } 
-    else {
-      return data ?.id?? null
-    }
-  }
-  
-}
 
 </script>
