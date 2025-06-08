@@ -5,14 +5,16 @@
     <h1>Add Spending Categories</h1>
     <div>
     <input v-model="newCategory.name" placeholder="Name"/>
-    <input v-model="newCategory.budget_percent" placeholder="Spending budget_percent"/>
+    <input v-model="newCategory.budget_percent" placeholder="Spending budget percentage"/>
     <select v-model="newCategory.cost_type" >
         <option value="flex">Flexible</option>
         <option value="fixed">Fixed</option>
     </select>
     </div>
-    <button type="submit" @click="addCategory(), showTab = true" class="font-medium italic cursor-pointer">Add Category</button><br>
-    <button type="reset" class="font-medium italic cursor-pointer">Reset Values</button>
+    <button type="submit" @click="addCategory(), showTab = true" class="font-medium italic cursor-pointer">Add Category</button><br/>
+    <button type="reset" class="font-medium italic cursor-pointer">Reset Values</button><br/>
+    <RouterLink to="/dashboard" class="font-medium italic cursor-pointer"> Go Back </RouterLink>
+    <button v-if="finishedAnExpense" @click="goHome" class="font-medium italic cursor-pointer">Finish Expenses - can still be updated later!</button><br/>
     <br/>
 </form>
 
@@ -22,9 +24,9 @@
   <div class="info_container bg-base-200 rounded-lg px-4 py-6 max-w-3xl mx-auto">
       <h1 class="flex justify-center">SPENDING CATEGORIES</h1><br/>
       <h1 v-for="newCategory in categories"  :key="newCategory.name">
-          {{ newCategory.name}} - Monthly budget_percent
+          {{ newCategory.name}} - Monthly Budget Percent
   : {{ newCategory.budget_percent
-  }}, Type: {{ newCategory.cost_type }}
+  }} <br/> Type: {{ newCategory.cost_type }} amount
       </h1>
       <button @click="append_toProf()" class="font-medium italic cursor-pointer">Add to Profile!</button><br/>
       <button @click="removeTab()" type="reset" class="font-medium italic cursor-pointer">Remove</button>
@@ -37,13 +39,21 @@ import { type UserData, type Category } from '@/types.ts'
 import {reactive, ref} from "vue"
 import { supabase } from '@/supabase'
 import router from '@/router'
+import { finished } from 'stream'
 
 const showTab = ref<boolean>(false)
 function removeTab(){
   showTab.value = false
   categories.splice(0, categories.length) 
 }
+
+function goHome(){
+  router.push("/data")
+}
+
 const categories = reactive<Category[]>([])
+
+const finishedAnExpense = ref<boolean>(false)
 
 const newCategory = reactive<Category>({
     name: "",
@@ -86,9 +96,11 @@ async function append_toProf() {
   ])
   if (error) {
     alert("Error updating expenses!")
+    console.log(error)
   }else{
     alert("Profile Updated!")
-    showTab.value = false //after here add a button for the user to be finish updating expenses which then reroutes to hoem
+    showTab.value = false
+    finishedAnExpense.value = true
   }
   }
 }

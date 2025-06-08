@@ -20,7 +20,7 @@
     <button type="reset" class="font-medium italic cursor-pointer">Reset Values</button>
   </div>
   <div class="flex justify-center">
-    <RouterLink to="/" class="font-medium italic cursor-pointer"> Go Back </RouterLink>
+    <RouterLink to="/dashboard" class="font-medium italic cursor-pointer"> Go Back </RouterLink>
   </div>
 </form>
 

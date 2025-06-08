@@ -7,9 +7,11 @@ import ThemeSelector from './components/ThemeSelector.vue'
 import { supabase } from './supabase';
 import LogOut from './components/LogOut.vue';
 import DashboardView from './views/DashboardView.vue';
+import router from './router';
 
 const auth = useAuthStore()
 const username = ref("")
+const dashboardButtonVisible = ref<boolean>(true)
 
 const headerRef = ref<HTMLElement | null>(null)
 
@@ -33,6 +35,15 @@ async function useAuth() {
   }
 }
 
+function goToDashboard(){
+  dashboardButtonVisible.value = false
+  router.push("/dashboard")
+}
+
+function turnTrue(){
+    dashboardButtonVisible.value = true
+}
+
 const getUsername = async (userId: string)=>{
   const{ data, error } = await supabase.from('users').select('username').eq('id', userId).maybeSingle();
   
@@ -53,7 +64,7 @@ const getUsername = async (userId: string)=>{
         <ThemeSelector />
       </div>
       <div class="pt-3 flex justify-center">
-      <RouterLink to="/" class="cursor-pointer border-primary text-lg px-3 py-3 rounded-lg hover:text-3xl duration-200 border-4 border-solid bg-base-200">Home</RouterLink>
+      <RouterLink to="/" @click="turnTrue" class="cursor-pointer border-primary text-lg px-3 py-3 rounded-lg hover:text-3xl duration-200 border-4 border-solid bg-base-200">Home</RouterLink>
       </div>
       <h1
         v-if="!auth.isLoggedIn"
@@ -73,9 +84,9 @@ const getUsername = async (userId: string)=>{
             </RouterLink>
 
             <div v-else class="text-center mt-4">
-              <br/><h1>Welcome {{ username }}</h1>
-             <br/><LogOut/><br/>
-                <DashboardView/>
+              <br/><LogOut/>
+              <br/><h1>Welcome {{ username }}</h1><br/>
+              <button v-if="dashboardButtonVisible" @click="goToDashboard" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Dashboard</button>
             </div>
         </div>
         <br/>
