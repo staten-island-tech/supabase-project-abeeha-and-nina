@@ -35,6 +35,7 @@ import Button from "primevue/button";
 import ExpenseForm from "../ProfileInfo/ExpenseForm.vue";
 import { supabase } from "@/supabase";
 import { useAuthStore } from '@/stores/pinia'
+import { idText } from "typescript";
 
 const auth = useAuthStore()
 const currentUser = auth.currentUser
@@ -54,12 +55,32 @@ function add_Option() {
 //need to access the content of categories from supabase, and store it initially in expenseform
 
 async function getCategories() {
+    if (currentUser?.publicId) {
     const { data, error } = await supabase
   .from('expenses')
   .select("category_name")
-   .eq('user_id', currentUser.publicId) //make public_id a variable avaiable everywhere
+   .eq('user_id', currentUser.publicId) 
+    }
 
     }
+
+const userExpenses = ref([])
+
+async function getExpenses() {
+    if (currentUser?.publicId) {
+const { data, error } = await supabase
+  .from('expenses')
+  .select("*")
+   .eq('user_id', currentUser.publicId)
+    
+if (error) {
+    console.error(error)
+}
+else userExpenses.value = data
+    }
+
+
+}
 
 </script>
 
