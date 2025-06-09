@@ -1,7 +1,8 @@
 <template>
     <div class="flex place-content-center grid-cols-2 gap-16">
         <form class="form bg-base-200 rounded-lg px-32" @submit.prevent>
-            <h1 class="flex justify-center text-4xl ml-48 px-4 py-4 font-extrabold">EXPENSE FORM</h1>
+            <h1 v-if="showUpdateIfSubmitted" class="flex justify-center text-4xl ml-48 px-4 py-4 font-extrabold">ADD TO EXPENSE FORM</h1>
+            <h1 v-else class="flex justify-center text-4xl ml-48 px-4 py-4 font-extrabold">EXPENSE FORM</h1>
     <h1>Add Spending Categories</h1>
     <div>
     <input v-model="newCategory.name" placeholder="Name"/>
@@ -13,7 +14,7 @@
     </div>
     <button type="submit" @click="addCategory(), showTab = true" class="font-medium italic cursor-pointer">Add Category</button><br/>
     <button type="reset" class="font-medium italic cursor-pointer">Reset Values</button><br/>
-    <RouterLink to="/dashboard" class="font-medium italic cursor-pointer"> Go Back </RouterLink>
+    <RouterLink to="/dashboard" class="font-medium italic cursor-pointer"> Go Back </RouterLink><br/>
     <button v-if="finishedAnExpense" @click="goHome" class="font-medium italic cursor-pointer">Finish Expenses - can still be updated later!</button><br/>
     <br/>
 </form>
@@ -27,7 +28,7 @@
   : {{ newCategory.budget_percent
   }} <br/> Type: {{ newCategory.cost_type }} amount
       </h1>
-      <button @click="append_toProf()" class="font-medium italic cursor-pointer">Add to Profile!</button><br/>
+      <button @click="append_toProf(), showUpdate()" class="font-medium italic cursor-pointer">Add to Profile!</button><br/>
       <button @click="removeTab()" type="reset" class="font-medium italic cursor-pointer">Remove</button>
   </div>
 </div>
@@ -46,8 +47,14 @@ function removeTab(){
   categories.splice(0, categories.length) 
 }
 
+const showUpdateIfSubmitted = ref<boolean>(false)
+
+function showUpdate(){
+  showUpdateIfSubmitted.value = true
+}
+
 function goHome(){
-  router.push("/data")
+  router.push("/dashboard")
 }
 
 const categories = reactive<Category[]>([])
