@@ -86,8 +86,8 @@ const router = createRouter({
       meta: {requiresAuth: false}  //Change later, just for testing
     },
       {
-      path: '/data',
-      name: 'data',
+      path: '/main',
+      name: 'main',
       component: MainHome,
       meta: {requiresAuth: true}  //Change later, just for testing
     },

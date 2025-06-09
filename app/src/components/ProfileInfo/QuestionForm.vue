@@ -2,7 +2,8 @@
 <div class="flex place-content-center grid-cols-3 gap-16">
 
 <form v-if="showUser" class="form bg-base-200 rounded-lg px-32 py-5" @submit.prevent>   
-  <h1 class="flex justify-center text-4xl ml-48 px-4 py-4 font-extrabold">BASIC INFO</h1>
+  <h1 v-if="showUpdateIfSubmitted" class="flex justify-center text-4xl ml-48 px-4 py-4 font-extrabold">UPDATE BASIC INFO</h1>
+  <h1 v-else class="flex justify-center text-4xl ml-48 px-4 py-4 font-extrabold">BASIC INFO</h1>
   <input v-model="UserInfo.nName" placeholder="Preferred Name" /><br/>
 
   <h1>INCOME</h1>
@@ -35,7 +36,7 @@
     
     <div class="grid grid-cols-2">
         <button type="button" @click="updateProfile()" class="font-medium italic cursor-pointer">Yes</button>
-        <button type="button" @click="showInfo = false" class="font-medium italic cursor-pointer">No</button>
+        <button type="button" @click="showInfo = false, showUpdate()" class="font-medium italic cursor-pointer">No</button>
     </div>
 </div>
 
@@ -60,6 +61,11 @@ const UserInfo = reactive<UserData>({
     spend_goal:null,
 })
 
+const showUpdateIfSubmitted = ref<boolean>(false)
+
+function showUpdate(){
+  showUpdateIfSubmitted.value = true
+}
 
 const showInfo = ref<boolean>(false)
 const showUser = ref<boolean>(true)
@@ -94,7 +100,7 @@ async function updateProfile() {
             showInfo.value = false
             showUser.value = false
             userState.value = true
-            router.push("/")
+            router.push("/dashboard")
         }
     }
 }

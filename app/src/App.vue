@@ -12,6 +12,7 @@ import router from './router';
 const auth = useAuthStore()
 const username = ref("")
 const dashboardButtonVisible = ref<boolean>(true)
+const goMainHomeButtonVisible = ref<boolean>(true)
 
 const headerRef = ref<HTMLElement | null>(null)
 
@@ -40,8 +41,21 @@ function goToDashboard(){
   router.push("/dashboard")
 }
 
+function goMainHome(){
+  goMainHomeButtonVisible.value = false
+  router.push("/main")
+}
+
 function turnTrue(){
     dashboardButtonVisible.value = true
+    goMainHomeButtonVisible.value = true
+}
+
+function turnHomeFalse(){
+    goMainHomeButtonVisible.value = false
+}
+function turnDashboardFalse(){
+    dashboardButtonVisible.value = false
 }
 
 const getUsername = async (userId: string)=>{
@@ -86,7 +100,8 @@ const getUsername = async (userId: string)=>{
             <div v-else class="text-center mt-4">
               <br/><LogOut/>
               <br/><h1>Welcome {{ username }}</h1><br/>
-              <button v-if="dashboardButtonVisible" @click="goToDashboard" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Dashboard</button>
+              <button v-if="dashboardButtonVisible" @click="goToDashboard(), turnHomeFalse()" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Dashboard</button>
+              <br/><br/><button v-if="goMainHomeButtonVisible" @click="goMainHome(), turnDashboardFalse()" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Your Budgeting</button>
             </div>
         </div>
         <br/>
