@@ -12,6 +12,7 @@ import { useAuthStore } from '@/stores/pinia'
 import ExpenseForm from '@/components/ProfileInfo/ExpenseForm.vue'
 import LogData from '@/components/Tables/LogData.vue'
 import MainHome from '@/components/MainHome.vue'
+import SpendingTable from "@/components/Tables/SpendingTable.vue"
 
 const router = createRouter({
   history: createWebHistory('/'),
@@ -90,6 +91,12 @@ const router = createRouter({
       name: 'main',
       component: MainHome,
       meta: {requiresAuth: true}  //Change later, just for testing
+    },
+    {
+      path: '/explog',
+      name: 'explog',
+      component: SpendingTable,
+      meta: {requiresAuth: false}  //Change later, just for testing
     },
   ],
 })

@@ -7,12 +7,26 @@
 </DataTable>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
+import { defineProps, onMounted } from 'vue';
+import userExpenses from "./LogData.vue"
+import getCategories from "./LogData.vue"
+import c_options from "./LogData.vue"
 
+ defineProps ({
+  userExpenses,
+  getCategories,
+  c_options
+  
+}
+)
 
+onMounted(() => {
+  
+})
 </script>
 
 <style lang="scss" scoped>

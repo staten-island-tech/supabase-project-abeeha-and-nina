@@ -69,5 +69,9 @@ export interface UserData { //separate from the AppUser interface, which is more
   
 }
 
+export interface Expense {
+  
+}
+
 //LogData
 

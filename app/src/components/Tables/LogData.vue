@@ -28,23 +28,18 @@
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import categories from "../ProfileInfo/ExpenseForm.vue";
 import AutoComplete from 'primevue/autocomplete';
 import type { Category } from "@/types";
 import Button from "primevue/button";
 import ExpenseForm from "../ProfileInfo/ExpenseForm.vue";
 import { supabase } from "@/supabase";
 import { useAuthStore } from '@/stores/pinia'
-import { idText } from "typescript";
 
 const auth = useAuthStore()
 const currentUser = auth.currentUser
 
 const selectedCategory = ref("")
 
-const c_options = computed(() => 
-    categories.value.map((c_option:Category) => ({label: c_option.name })) //map reading undef bc categories is empty
-)
 
 const showCatForm = ref(false)
 
@@ -54,17 +49,22 @@ function add_Option() {
 
 //need to access the content of categories from supabase, and store it initially in expenseform
 
+const c_options = ref<any>(null)
+
 async function getCategories() {
     if (currentUser?.publicId) {
     const { data, error } = await supabase
   .from('expenses')
   .select("category_name")
    .eq('user_id', currentUser.publicId) 
+    
+    if (data) {
+    c_options.value = data
+}
     }
+}
 
-    }
-
-const userExpenses = ref([])
+const userExpenses = ref([""])
 
 async function getExpenses() {
     if (currentUser?.publicId) {
@@ -73,14 +73,15 @@ const { data, error } = await supabase
   .select("*")
    .eq('user_id', currentUser.publicId)
     
-if (error) {
+if (data) {
+    userExpenses.value = data
+}
+else {
     console.error(error)
 }
-else userExpenses.value = data
-    }
-
-
 }
+}
+
 
 </script>
 
