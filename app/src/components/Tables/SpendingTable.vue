@@ -15,12 +15,14 @@ import { defineProps, onMounted } from 'vue';
 import userExpenses from "./LogData.vue"
 import getCategories from "./LogData.vue"
 import c_options from "./LogData.vue"
+import categories from "../ProfileInfo/ExpenseForm.vue"
+
 
  defineProps ({
   userExpenses,
   getCategories,
-  c_options
-  
+  c_options,
+  categories
 }
 )
 

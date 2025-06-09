@@ -18,7 +18,6 @@
     <br/>
 </form>
 
-<button @click="getUserPublicId()">Test ID</button>
 </div><br/>
 <div class="flex justify-center" v-if="showTab">
   <div class="info_container bg-base-200 rounded-lg px-4 py-6 max-w-3xl mx-auto">
