@@ -13,6 +13,7 @@ import ExpenseForm from '@/components/ProfileInfo/ExpenseForm.vue'
 import LogData from '@/components/Tables/LogData.vue'
 import MainHome from '@/components/MainHome.vue'
 import SpendingTable from "@/components/Tables/SpendingTable.vue"
+import UserProfile from '@/components/ProfileInfo/UserProfile.vue'
 
 const router = createRouter({
   history: createWebHistory('/'),
@@ -96,7 +97,13 @@ const router = createRouter({
       path: '/explog',
       name: 'explog',
       component: SpendingTable,
-      meta: {requiresAuth: false}  //Change later, just for testing
+      meta: {requiresAuth: true}  //Change later, just for testing
+    },
+        {
+      path: '/profile',
+      name: 'profile',
+      component: UserProfile,
+      meta: {requiresAuth: true}  //Change later, just for testing
     },
   ],
 })
