@@ -1,12 +1,9 @@
 import type { Component } from "vue";
 
 export interface AppUser {
-    name: string,
-    publicId: string,
     username: string,
     email: string,
     userId:string
-
   }
 
 
@@ -60,7 +57,7 @@ export function isPercent(value: number): value is percent {
 } //run this to check eveyr time your working with a percent
 
 export interface UserData { //separate from the AppUser interface, which is more for auth stuff
-  nName: string,
+  nName: string | null,
   pIncome:number | null,
   sIncome:number | null,
   Debt:number | null,
@@ -69,7 +66,9 @@ export interface UserData { //separate from the AppUser interface, which is more
   
 }
 
-export interface Expense {
+export interface ProfileInfo {
+  name:string,
+  email:string,
   
 }
 

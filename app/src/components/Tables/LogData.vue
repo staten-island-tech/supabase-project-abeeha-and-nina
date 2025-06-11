@@ -2,9 +2,6 @@
     <h1>Log Transactions and Earnings</h1>
     <button>Add Transaction</button>
     
-    <div>
-
-    </div>
     <button>Add Additional Earnings</button>
     <AutoComplete v-model="selectedCategory" optionLabel="label" :suggestions="c_options"> 
     <template #option="c_options">
@@ -27,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import AutoComplete from 'primevue/autocomplete';
 import type { Category } from "@/types";
 import Button from "primevue/button";
@@ -52,11 +49,11 @@ function add_Option() {
 const c_options = ref<any>(null)
 
 async function getCategories() {
-    if (currentUser?.publicId) {
+    if (currentUser) {
     const { data, error } = await supabase
   .from('expenses')
   .select("category_name")
-   .eq('user_id', currentUser.publicId) 
+   .eq('user_id', currentUser.userId) 
     
     if (data) {
     c_options.value = data
@@ -67,11 +64,11 @@ async function getCategories() {
 const userExpenses = ref([""])
 
 async function getExpenses() {
-    if (currentUser?.publicId) {
+    if (currentUser) {
 const { data, error } = await supabase
   .from('expenses')
   .select("*")
-   .eq('user_id', currentUser.publicId)
+   .eq('user_id', currentUser.userId)
     
 if (data) {
     userExpenses.value = data

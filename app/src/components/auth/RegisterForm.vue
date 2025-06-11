@@ -28,7 +28,6 @@ import { ref } from 'vue'
 import {supabase} from "../../supabase"
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../../stores/pinia'
-import type { AppUser } from '@/types'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -52,7 +51,6 @@ const registerUser = async () => {
   else if (data.user) {
         alert('You are now registered in the Finance App!');
     await linkUsers(data.user.id);
-    //await getUserPublicId()
     auth.login();
     router.push("/");
   }
