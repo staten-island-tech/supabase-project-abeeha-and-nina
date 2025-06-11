@@ -5,11 +5,8 @@ import type { AppUser } from '@/types'
 
 export const useAuthStore = defineStore('auth', () => {
   const isLoggedIn = ref(false)
-  const currentUser = ref<AppUser |null>({
-      userId: "",
-      email:    '',
-      username: '',
-});
+  const currentUser = ref<AppUser | null>(null)
+  const username = ref("")
   const check = ref(false)
 
   async function login(userData?: any) {
@@ -76,3 +73,4 @@ export const checkSubmitted = defineStore('forms', () => {
 
   return { hasSubmittedExpense, hasSubmittedIncome, markExpenseSubmitted, markIncomeSubmitted, loadSubmissionState }
 })
+

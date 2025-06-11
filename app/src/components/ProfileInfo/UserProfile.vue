@@ -3,7 +3,7 @@
 <h2> {{ currentUser?.email }}</h2><br>
 
 <h1>Financial Data</h1>
-<DataTable>
+<DataTable></DataTable>
 
 
 

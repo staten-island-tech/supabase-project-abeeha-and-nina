@@ -6,7 +6,11 @@ export interface AppUser {
     userId:string
   }
 
-
+export interface UserPersonalizedResponse {
+  primary_income: number
+  secondary_income: number
+  savings_goal: number
+}
 
 export interface data {
   user: AppUser;

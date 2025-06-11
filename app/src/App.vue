@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router';
+import { RouterLink, RouterView, useRoute } from 'vue-router';
 import { gsap } from "gsap"
 import { ref, onMounted } from 'vue'
 import { useAuthStore } from './stores/pinia';
@@ -11,10 +11,12 @@ import router from './router';
 import { checkSubmitted } from '@/stores/pinia';
 
 const check = checkSubmitted()
-
+const route = useRoute()
 const auth = useAuthStore()
 const dashboardButtonVisible = ref<boolean>(true)
 const goMainHomeButtonVisible = ref<boolean>(true)
+const goProfileButtonVisible = ref<boolean>(true)
+
 
 const headerRef = ref<HTMLElement | null>(null)
 
@@ -49,13 +51,23 @@ function goMainHome(){
   router.push("/main")
 }
 
+function goProfile(){
+  goMainHomeButtonVisible.value = false
+  router.push("/profile")
+}
+
 function turnTrue(){
     dashboardButtonVisible.value = true
     goMainHomeButtonVisible.value = true
+    goProfileButtonVisible.value = true
 }
 
 function turnHomeFalse(){
     goMainHomeButtonVisible.value = false
+}
+
+function turnProfileFalse(){
+    goProfileButtonVisible.value = false
 }
 function turnDashboardFalse(){
     dashboardButtonVisible.value = false
@@ -91,8 +103,13 @@ function turnDashboardFalse(){
             <div v-else class="text-center mt-4">
               <br/><LogOut/>
               <br/><h1>Welcome {{ auth.username }}!</h1><br/>
-              <button v-if="dashboardButtonVisible" @click="goToDashboard(), turnHomeFalse()" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Dashboard</button>
-              <br/><br/><button v-if="goMainHomeButtonVisible && check.hasSubmittedExpense && check.hasSubmittedIncome" @click="goMainHome(), turnDashboardFalse()" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Your Budgeting</button>
+              <div v-if="route.path === '/'">
+                <button @click="goToDashboard" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Dashboard</button>
+                <br/><br/>
+                <button v-if="check.hasSubmittedExpense && check.hasSubmittedIncome" @click="goMainHome" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Your Budgeting</button>
+                <br/><br/>
+                <button v-if="check.hasSubmittedExpense && check.hasSubmittedIncome" @click="goProfile" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Your Profile</button>
+            </div>
             </div>
         </div>
         <br/>

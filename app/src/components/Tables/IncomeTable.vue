@@ -1,15 +1,42 @@
 <template>
-<DataTable :value="products" tableStyle="min-width: 50rem">
-    <Column field="code" header="Code"></Column>
-    <Column field="name" header="Name"></Column>
-    <Column field="category" header="Category"></Column>
-    <Column field="quantity" header="Quantity"></Column>
+    <div class="w-full px-36">
+<DataTable :value="usersRowData" tableStyle="min-width: 50rem">
+    <Column field="primary_income" header="Primary Income"></Column>
+    <Column field="secondary_income" header="Secondary Income"></Column>
+    <Column field="savings_goal" header="Savings Goal"></Column>
 </DataTable>
+</div>
 </template>
 
 <script setup lang="ts">
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
-import ColumnGroup from 'primevue/columngroup';
-import Row from 'primevue/row';  
+import { supabase } from '@/supabase';
+import { ref, onMounted } from 'vue'
+import type { UserPersonalizedResponse } from '@/types'
+
+const usersRowData = ref<UserPersonalizedResponse[]>([])
+
+onMounted(async () => {
+  const { data: { user }, error: authError } = await supabase.auth.getUser()
+
+  if (authError) {
+    alert("There was an error fetching user!")
+    return
+  }
+
+  if (user) {
+    const { data, error } = await supabase
+      .from('user_personalized_responses')
+      .select("primary_income, secondary_income, savings_goal")
+      .eq('user_id', user.id)
+      .single()
+
+    if (error) {
+      alert("There was an error fetching the data")
+    } else if (data) {
+      usersRowData.value = [data]
+    }
+  }
+})
 </script>

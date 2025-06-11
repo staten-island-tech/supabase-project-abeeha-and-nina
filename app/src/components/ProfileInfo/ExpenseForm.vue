@@ -16,7 +16,7 @@
     <button type="reset" class="font-medium italic cursor-pointer">Reset Values</button><br/>
     <RouterLink to="/dashboard" class="font-medium italic cursor-pointer"> Go Back </RouterLink><br/>
     <button v-if="finishedAnExpense" @click="goHome" class="font-medium italic cursor-pointer">Finish Expenses - can still be updated later!</button><br/>
-    <br/>
+    <br/><br/><br/>
 </form>
 
 </div><br/>
@@ -85,7 +85,7 @@ function addCategory() {
 async function append_toProf() {
   const user = (await supabase.auth.getUser()).data.user;
   if (user) {
-    const { data, error } = await supabase.from('expenses').upsert([{
+    const { data, error } = await supabase.from('expenses').insert([{
       user_id: user.id,
       category_name: newCategory.name,
       budget_percent: newCategory.budget_percent,
