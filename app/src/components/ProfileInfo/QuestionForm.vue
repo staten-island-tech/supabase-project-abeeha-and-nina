@@ -79,10 +79,6 @@ function previewInfo() {
     showInfo.value = true
 }
 
-//Append to tables
-
-// const public_id  = await getUserPublicId()
-
 async function updateProfile() {
     const user = (await supabase.auth.getUser()).data.user;
       if (user) {

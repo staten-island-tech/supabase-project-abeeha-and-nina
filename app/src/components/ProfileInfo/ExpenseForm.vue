@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts" setup>
-import { type UserData, type Category } from '@/types.ts'
+import { type Category } from '@/types.ts'
 import {reactive, ref} from "vue"
 import { supabase } from '@/supabase'
 import router from '@/router'
@@ -80,24 +80,6 @@ const newCategory = reactive<Category>({
 function addCategory() {
     categories.push({...(newCategory)})
 
-}
-
-async function getUserPublicId() {
-  const {data: {user}} = await supabase.auth.getUser();
-  if (!user) {
-    return null
-  }
-  else {
-    const {data, error} = await supabase.from("users").select("user_id").eq("UID", user.id).single();
-    if (error) {
-      console.error("unable to get user_id")
-      return null
-    } 
-    else {
-      return data ?.user_id?? null
-    }
-  }
-  
 }
 
 async function append_toProf() {
