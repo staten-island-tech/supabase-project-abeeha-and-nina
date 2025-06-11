@@ -12,7 +12,7 @@
         <option value="fixed">Fixed</option>
     </select>
     </div>
-    <button type="submit" @click="addCategory(), showTab = true" class="font-medium italic cursor-pointer">Add Category</button><br/>
+    <button type="submit" @click="addCategory(), showTab = true, resetForm()" class="font-medium italic cursor-pointer">Add Category</button><br/>
     <button type="reset" class="font-medium italic cursor-pointer">Reset Values</button><br/>
     <RouterLink to="/dashboard" class="font-medium italic cursor-pointer"> Go Back </RouterLink><br/>
     <button v-if="finishedAnExpense" @click="goHome" class="font-medium italic cursor-pointer">Finish Expenses - can still be updated later!</button><br/>
@@ -48,6 +48,12 @@ function removeTab(){
 }
 
 const showUpdateIfSubmitted = ref<boolean>(false)
+
+function resetForm() {
+  newCategory.name = "";
+  newCategory.budget_percent = null;
+  newCategory.cost_type = "fixed";
+}
 
 function showUpdate(){
   showUpdateIfSubmitted.value = true

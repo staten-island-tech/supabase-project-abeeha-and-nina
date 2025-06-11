@@ -1,19 +1,20 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { supabase } from '../supabase'
 import type { AppUser } from '@/types'
-// import { getUserPublicId } from '@/components/auth/RegisterForm.vue'
 
 export const useAuthStore = defineStore('auth', () => {
 
   const isLoggedIn = ref(false)
-  const currentUser = ref<AppUser | null>(null) //changed name to currentUSer bc confusing naming
+  const currentUser = ref<AppUser | null>(null)
+  const username = ref("")
   const check = ref(false)
 
-  function login(userData?: any) {
+  async function login(userData?: any) {
     isLoggedIn.value = true
     if (userData) {
       currentUser.value = userData
+      await fetchUsername(userData.id) 
     }
   }
 
@@ -21,8 +22,22 @@ export const useAuthStore = defineStore('auth', () => {
     supabase.auth.signOut()
     isLoggedIn.value = false
     currentUser.value = null
+    username.value = ""
   }
 
+  async function fetchUsername(userId: string) {
+    const { data, error } = await supabase
+      .from('users')
+      .select('username')
+      .eq('id', userId)
+      .maybeSingle()
 
-  return { isLoggedIn, currentUser, login, logout, check }
+    if (error) {
+      alert(error.message)
+    } else if (data) {
+      username.value = data.username
+    }
+  }
+
+  return { isLoggedIn, currentUser, username, login, logout, check }
 })

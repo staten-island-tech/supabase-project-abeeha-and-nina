@@ -10,7 +10,6 @@ import DashboardView from './views/DashboardView.vue';
 import router from './router';
 
 const auth = useAuthStore()
-const username = ref("")
 const dashboardButtonVisible = ref<boolean>(true)
 const goMainHomeButtonVisible = ref<boolean>(true)
 
@@ -30,9 +29,7 @@ async function useAuth() {
   const { data } = await supabase.auth.getSession()
   if (data.session) {
     const user = data.session.user;
-
-    auth.login(data.session.user)
-    await getUsername(user.id);        
+    await auth.login(user)       
   }
 }
 
@@ -57,18 +54,6 @@ function turnHomeFalse(){
 function turnDashboardFalse(){
     dashboardButtonVisible.value = false
 }
-
-const getUsername = async (userId: string)=>{
-  const{ data, error } = await supabase.from('users').select('username').eq('id', userId).maybeSingle();
-  
-  if (error){
-    alert(error.message);
-  }
-  else if(data){
-    username.value = data.username
-    
-  }
-  }
 </script>
 
 <template>
@@ -99,7 +84,7 @@ const getUsername = async (userId: string)=>{
 
             <div v-else class="text-center mt-4">
               <br/><LogOut/>
-              <br/><h1>Welcome {{ username }}</h1><br/>
+              <br/><h1>Welcome {{ auth.username }}!</h1><br/>
               <button v-if="dashboardButtonVisible" @click="goToDashboard(), turnHomeFalse()" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Dashboard</button>
               <br/><br/><button v-if="goMainHomeButtonVisible" @click="goMainHome(), turnDashboardFalse()" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Your Budgeting</button>
             </div>

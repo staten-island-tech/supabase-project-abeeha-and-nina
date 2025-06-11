@@ -15,15 +15,12 @@ const logInUser = async() =>{
     password: password.value,
     }
 )
-  if (error) alert (error.message);
-  else if (data.user){
-    alert("Logged in successfully!");
-    auth.login();
-    router.push("/")
-  }
-  else{
-    console.log(error);
-  }
+    if (error) alert (error.message);
+    else if (data.user){
+      alert("Logged in successfully!");
+      await auth.login(data.user);
+      router.push("/")
+    }
 }
 
 </script>
