@@ -17,10 +17,6 @@
 </DataTable>
 
 
-
-
-
-  
 </template>
 
 <script setup lang="ts">
@@ -68,7 +64,7 @@ async function getExpenseData() {
           
     const {data: expenseData, error} = await supabase.from("expenses").select("category_name, budget_percent, cost_type").eq("user_id", currentUser.userId).maybeSingle()
     if (expenseData) {
-        console.log(expenseData)
+        console.log("hello world")
         expense_info.value.push(
         { name:expenseData.category_name, value: expenseData.budget_percent, type:expenseData.cost_type.toString() },
         )

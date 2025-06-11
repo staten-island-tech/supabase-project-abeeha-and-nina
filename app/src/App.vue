@@ -84,7 +84,7 @@ function turnDashboardFalse(){
 
             <div v-else class="text-center mt-4">
               <br/><LogOut/>
-              <br/><h1>Welcome {{ auth.username }}!</h1><br/>
+              <br/><h1>Welcome {{ auth.username }}</h1><br/>
               <button v-if="dashboardButtonVisible" @click="goToDashboard(), turnHomeFalse()" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Dashboard</button>
               <br/><br/><button v-if="goMainHomeButtonVisible" @click="goMainHome(), turnDashboardFalse()" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Your Budgeting</button>
             </div>

@@ -1,9 +1,9 @@
 import type { Component } from "vue";
 
 export interface AppUser {
-    username: string,
-    email: string,
-    userId:string
+    username: string | null,
+    email: string | null,
+    userId:string | null
   }
 
 

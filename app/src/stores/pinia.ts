@@ -6,12 +6,14 @@ import type { AppUser } from '@/types'
 export const useAuthStore = defineStore('auth', () => {
 
   const isLoggedIn = ref(false)
-  const currentUser = ref<AppUser |null>({
-      userId: "",
-      email:    '',
-      username: '',
-});
+  const currentUser = ref<AppUser | null>(null);
   const check = ref(false)
+
+ const getEmptyUser = (): AppUser => ({
+    userId: "",
+    email: '',
+    username: '',
+  })
 
   async function login(userData?: any) {
   isLoggedIn.value = true;
@@ -33,7 +35,8 @@ export const useAuthStore = defineStore('auth', () => {
   function logout() {
     supabase.auth.signOut()
     isLoggedIn.value = false
-    currentUser.value = null
+    currentUser.value = getEmptyUser()
+    check.value = false
   }
 
   const username = computed(() => currentUser.value?.username || '')
