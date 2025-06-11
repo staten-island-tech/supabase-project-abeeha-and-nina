@@ -8,6 +8,9 @@ import { supabase } from './supabase';
 import LogOut from './components/LogOut.vue';
 import DashboardView from './views/DashboardView.vue';
 import router from './router';
+import { checkSubmitted } from '@/stores/pinia';
+
+const check = checkSubmitted()
 
 const auth = useAuthStore()
 const dashboardButtonVisible = ref<boolean>(true)
@@ -23,6 +26,7 @@ onMounted(() => {
     ease: "power2.out"
   })
   useAuth()
+  check.loadSubmissionState()
 })
 
 async function useAuth() {
@@ -30,7 +34,9 @@ async function useAuth() {
   if (data.session) {
     const user = data.session.user;
     await auth.login(user)       
+    check.loadSubmissionState()
   }
+  
 }
 
 function goToDashboard(){
@@ -86,7 +92,7 @@ function turnDashboardFalse(){
               <br/><LogOut/>
               <br/><h1>Welcome {{ auth.username }}!</h1><br/>
               <button v-if="dashboardButtonVisible" @click="goToDashboard(), turnHomeFalse()" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Dashboard</button>
-              <br/><br/><button v-if="goMainHomeButtonVisible" @click="goMainHome(), turnDashboardFalse()" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Your Budgeting</button>
+              <br/><br/><button v-if="goMainHomeButtonVisible && check.hasSubmittedExpense && check.hasSubmittedIncome" @click="goMainHome(), turnDashboardFalse()" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Your Budgeting</button>
             </div>
         </div>
         <br/>

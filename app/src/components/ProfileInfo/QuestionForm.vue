@@ -49,6 +49,10 @@ import { type UserData, type Category } from '@/types'
 import {reactive, ref} from "vue"
 import { supabase } from '@/supabase'
 import router from '@/router'
+import { checkSubmitted } from '@/stores/pinia'
+import ExpenseForm from './ExpenseForm.vue'
+
+const check = checkSubmitted()
 
 //Frm INfo stroe
 
@@ -101,6 +105,7 @@ async function updateProfile() {
             showUser.value = false
             userState.value = true
             router.push("/dashboard")
+            check.markIncomeSubmitted()
         }
     }
 }

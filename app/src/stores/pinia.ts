@@ -4,7 +4,6 @@ import { supabase } from '../supabase'
 import type { AppUser } from '@/types'
 
 export const useAuthStore = defineStore('auth', () => {
-
   const isLoggedIn = ref(false)
   const currentUser = ref<AppUser | null>(null)
   const username = ref("")
@@ -23,6 +22,8 @@ export const useAuthStore = defineStore('auth', () => {
     isLoggedIn.value = false
     currentUser.value = null
     username.value = ""
+    localStorage.removeItem("hasSubmittedExpense")
+    localStorage.removeItem("hasSubmittedIncome")
   }
 
   async function fetchUsername(userId: string) {
@@ -40,4 +41,26 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   return { isLoggedIn, currentUser, username, login, logout, check }
+})
+
+export const checkSubmitted = defineStore('forms', () => {
+  const hasSubmittedExpense = ref(false)
+  const hasSubmittedIncome = ref(false)
+  
+  function markExpenseSubmitted() {
+    hasSubmittedExpense.value = true
+    localStorage.setItem("hasSubmittedExpense", "true")
+  }
+
+  function markIncomeSubmitted() {
+    hasSubmittedIncome.value = true
+    localStorage.setItem("hasSubmittedIncome", "true")
+  }
+
+  function loadSubmissionState() {
+    hasSubmittedExpense.value = localStorage.getItem("hasSubmittedExpense") === "true"
+    hasSubmittedIncome.value = localStorage.getItem("hasSubmittedIncome") === "true"
+  }
+
+  return { hasSubmittedExpense, hasSubmittedIncome, markExpenseSubmitted, markIncomeSubmitted, loadSubmissionState }
 })

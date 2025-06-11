@@ -40,6 +40,10 @@ import {reactive, ref} from "vue"
 import { supabase } from '@/supabase'
 import router from '@/router'
 import { finished } from 'stream'
+import { checkSubmitted } from '@/stores/pinia'
+
+const check = checkSubmitted()
+
 
 const showTab = ref<boolean>(false)
 function removeTab(){
@@ -113,6 +117,7 @@ async function append_toProf() {
     alert("Profile Updated!")
     showTab.value = false
     finishedAnExpense.value = true
+    check.markExpenseSubmitted()
   }
   }
 }
