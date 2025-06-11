@@ -28,7 +28,7 @@ export interface RegisterForm {
 }
 //QuestionForm
 
-export type CostType = "fixed" | "flexible"
+export type CostType = "fixed" | "flexible" | "Cost Type"
 
 export interface QuestionForm {
   name: string,
@@ -72,5 +72,16 @@ export interface ProfileInfo {
   
 }
 
-//LogData
+//UserProfile
+
+export interface Expense {
+  name:string
+  value:percent | string
+  type:CostType
+}
+
+export interface Finance_Info {
+  name:string
+  value:number
+}
 

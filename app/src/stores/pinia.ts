@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 import { supabase } from '../supabase'
 import type { AppUser } from '@/types'
@@ -34,22 +34,23 @@ export const useAuthStore = defineStore('auth', () => {
     supabase.auth.signOut()
     isLoggedIn.value = false
     currentUser.value = null
-    username.value = ""
   }
 
-  async function fetchUsername(userId: string) {
-    const { data, error } = await supabase
-      .from('users')
-      .select('username')
-      .eq('id', userId)
-      .maybeSingle()
+  const username = computed(() => currentUser.value?.username || '')
 
-    if (error) {
-      alert(error.message)
-    } else if (data) {
-      username.value = data.username
-    }
-  }
+  // async function fetchUsername(userId: string) {
+  //   const { data, error } = await supabase
+  //     .from('users')
+  //     .select('username')
+  //     .eq('id', userId)
+  //     .maybeSingle()
+
+  //   if (error) {
+  //     alert(error.message)
+  //   } else if (data) {
+  //     currentusername.value = data.username
+  //   }
+  // }
 
   return { isLoggedIn, currentUser, username, login, logout, check }
 })
