@@ -1,11 +1,12 @@
 <template>
-    <div class="w-full px-36">
-<DataTable :value="usersRowData" tableStyle="min-width: 50rem">
+  <div class="flex justify-center">
+    <div class="w-full px-44">
+<DataTable :value="usersRowData" showGridlines tableStyle="max-width: 100rem">
     <Column field="primary_income" header="Primary Income"></Column>
     <Column field="secondary_income" header="Secondary Income"></Column>
     <Column field="savings_goal" header="Savings Goal"></Column>
 </DataTable>
-</div>
+</div></div>
 </template>
 
 <script setup lang="ts">

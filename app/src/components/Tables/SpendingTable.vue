@@ -1,6 +1,7 @@
 <template>
-  <div class="w-full px-24">
-  <DataTable :value="expenseStore.expenses" showGridlines tableStyle="max-width: 100rem">
+  <div class="flex justify-center">
+  <div class="w-full">
+  <DataTable :value="expenseStore.expenses" showGridlines tableStyle="max-width: 150rem">
     <Column field="type" header="Type"></Column>
     <Column field="name" header="Name"></Column>
     <Column field="category" header="Category"></Column>
@@ -8,6 +9,7 @@
     <Column field="date" header="Date"></Column>
 
   </DataTable>
+</div>
 </div>
 </template>
 
@@ -27,7 +29,7 @@ onMounted(async () => {
   if (auth.currentUser?.userId) {
     await expenseStore.fetchExpenses(auth.currentUser.userId)
   } else {
-    console.error('User ID not available')
+    alert('User ID not available')
   }
 })
 

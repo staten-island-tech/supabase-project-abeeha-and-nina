@@ -8,12 +8,14 @@
             <IncomeTable></IncomeTable>
         </div>
     </div><br/><br/>
-        <div>
-            <h1 class="text-center flex justify-center">SPENDING</h1>
-            <div class="flex justify-center">
-                <SpendingTable></SpendingTable>
-            </div>  
+    <div>
+        <div class="flex justify-center">
+            <h1>SPENDING</h1>
+        </div>
+        <div class="flex justify-center">
+            <SpendingTable></SpendingTable>
         </div><br/><br/>
+    </div>
         <div>
             <LogData></LogData>
         </div>
