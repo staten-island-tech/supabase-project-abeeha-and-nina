@@ -25,7 +25,7 @@ import Column from 'primevue/column';
 import { supabase } from '@/supabase';
 import { useAuthStore } from '@/stores/pinia';
 import { onMounted, ref, computed } from 'vue';
-import { type Finance_Info, type CostType, type Expense } from '@/types';
+import { type Finance_Info, type Category } from '@/types';
 const authStore = useAuthStore()
 const currentUser = authStore.currentUser
 
@@ -40,7 +40,7 @@ const finance_info = ref<Finance_Info[]>([
 
 ])
 
-const expense_info = ref<Expense[]>([
+const expense_info = ref<Category[]>([
 ])
 
 
@@ -66,10 +66,10 @@ async function getExpenseData() {
     if (expenseData) {
         console.log("hello world")
         expense_info.value.push(
-        { name:expenseData.category_name, value: expenseData.budget_percent, type:expenseData.cost_type.toString() },
+        { name:expenseData.category_name, budget_percent: expenseData.budget_percent, cost_type:expenseData.cost_type.toString() },
         )
     }
-    else if (error) {
+    if (error) {
         console.error(error)
     }
 }
