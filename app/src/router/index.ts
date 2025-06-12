@@ -7,13 +7,13 @@ import DashboardView from '@/views/DashboardView.vue'
 import AuthPage from '@/views/AuthPage.vue'
 import UpdatePassword from "@/components/auth/ResetPassword/UpdatePassword.vue"
 import QuestionForm from '@/components/ProfileInfo/QuestionForm.vue'
-import LogOut from '@/components/LogOut.vue'
 import { useAuthStore } from '@/stores/pinia'
 import ExpenseForm from '@/components/ProfileInfo/ExpenseForm.vue'
 import LogData from '@/components/Tables/LogData.vue'
 import MainHome from '@/components/MainHome.vue'
 import SpendingTable from "@/components/Tables/SpendingTable.vue"
 import UserProfile from '@/components/ProfileInfo/UserProfile.vue'
+import LogOut from '@/components/LogOut.vue'
 
 const router = createRouter({
   history: createWebHistory('/'),

@@ -1,9 +1,9 @@
 import type { Component } from "vue";
 
 export interface AppUser {
-    username: string,
-    email: string,
-    userId:string
+    username: string | null,
+    email: string | null,
+    userId:string | null
   }
 
 export interface UserPersonalizedResponse {
@@ -32,7 +32,7 @@ export interface RegisterForm {
 }
 //QuestionForm
 
-export type CostType = "fixed" | "flexible"
+export type CostType = "fixed" | "flexible" | "Cost Type"
 
 export interface QuestionForm {
   name: string,
@@ -76,5 +76,16 @@ export interface ProfileInfo {
   
 }
 
-//LogData
+//UserProfile
+
+export interface Expense {
+  name:string
+  value:percent | string
+  type:CostType
+}
+
+export interface Finance_Info {
+  name:string
+  value:number
+}
 

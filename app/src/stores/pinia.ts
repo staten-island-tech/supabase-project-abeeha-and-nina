@@ -1,13 +1,18 @@
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 import { supabase } from '../supabase'
 import type { AppUser } from '@/types'
 
 export const useAuthStore = defineStore('auth', () => {
   const isLoggedIn = ref(false)
-  const currentUser = ref<AppUser | null>(null)
-  const username = ref("")
+  const currentUser = ref<AppUser | null>(null);
   const check = ref(false)
+
+ const getEmptyUser = (): AppUser => ({
+    userId: "",
+    email: '',
+    username: '',
+  })
 
   async function login(userData?: any) {
   isLoggedIn.value = true;
@@ -29,25 +34,26 @@ export const useAuthStore = defineStore('auth', () => {
   function logout() {
     supabase.auth.signOut()
     isLoggedIn.value = false
-    currentUser.value = null
-    username.value = ""
+    currentUser.value = getEmptyUser()
     localStorage.removeItem("hasSubmittedExpense")
     localStorage.removeItem("hasSubmittedIncome")
   }
 
-  async function fetchUsername(userId: string) {
-    const { data, error } = await supabase
-      .from('users')
-      .select('username')
-      .eq('id', userId)
-      .maybeSingle()
+  const username = computed(() => currentUser.value?.username || '')
 
-    if (error) {
-      alert(error.message)
-    } else if (data) {
-      username.value = data.username
-    }
-  }
+  // async function fetchUsername(userId: string) {
+  //   const { data, error } = await supabase
+  //     .from('users')
+  //     .select('username')
+  //     .eq('id', userId)
+  //     .maybeSingle()
+
+  //   if (error) {
+  //     alert(error.message)
+  //   } else if (data) {
+  //     currentusername.value = data.username
+  //   }
+  // }
 
   return { isLoggedIn, currentUser, username, login, logout, check }
 })
