@@ -1,18 +1,16 @@
 <script setup lang="ts">
 import App from '@/App.vue';
 import { useRouter } from 'vue-router';
-
+import { supabase } from '@/supabase';
 import { useAuthStore } from '@/stores/pinia'
 
 const auth = useAuthStore()
 const router = useRouter()
 
-function onlogout() {
-  auth.logout,
+async function onlogout() {
+  await supabase.auth.signOut()
+  await auth.logout()
   router.push("/auth")
-  if (auth.currentUser) {
-      auth.currentUser.username = null
-  }
 }
 
 </script>

@@ -16,6 +16,20 @@ export interface data {
   user: AppUser;
 }
 
+export interface displayFinance {
+  name: string;
+  value: number | string;
+}
+
+export type BarChartData = {
+  label: string
+  value: number
+}
+
+export type expencePercent = {
+  category_name: string
+  budget_percent: number
+}
 
 export interface DashboardView {
   type:Component,

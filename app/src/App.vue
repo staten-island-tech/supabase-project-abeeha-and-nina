@@ -6,7 +6,6 @@ import { useAuthStore } from './stores/pinia';
 import ThemeSelector from './components/ThemeSelector.vue'
 import { supabase } from './supabase';
 import LogOut from './components/LogOut.vue';
-import DashboardView from './views/DashboardView.vue';
 import Menu from 'primevue/menu';
 import router from './router';
 import { checkSubmitted } from '@/stores/pinia';
@@ -14,23 +13,19 @@ import { checkSubmitted } from '@/stores/pinia';
 const check = checkSubmitted()
 const route = useRoute()
 const auth = useAuthStore()
-const dashboardButtonVisible = ref<boolean>(true)
-const goMainHomeButtonVisible = ref<boolean>(true)
-const goProfileButtonVisible = ref<boolean>(true)
-const goGraphsButtonVisible = ref<boolean>(true)
 
 
 const headerRef = ref<HTMLElement | null>(null)
 
-onMounted(() => {
+onMounted(async() => {
+  await useAuth()
+  check.loadSubmissionState()
   gsap.from(headerRef.value, {
     y: -50,
     opacity: 0,
-    duration: 1,
+    duration: 3,
     ease: "power2.out"
   })
-  useAuth()
-  check.loadSubmissionState()
 })
 
 async function useAuth() {
@@ -40,6 +35,7 @@ async function useAuth() {
     await auth.login(user)       
     check.loadSubmissionState()
   }
+  
   
 }
 
@@ -71,19 +67,19 @@ function goGraphs(){
         <ThemeSelector />
       </div>
       <div class="pt-3 flex justify-center">
-      <RouterLink to="/" class="cursor-pointer border-primary text-lg px-3 py-3 rounded-lg hover:text-3xl duration-200 border-4 border-solid bg-base-200">Home</RouterLink>
+      <RouterLink to="/" class="cursor-pointer border-primary text-lg px-3 py-3 rounded-lg hover:text-3xl duration-200 border-4 border-solid bg-primary text-base-100">Home</RouterLink>
       </div>
       <h1
         v-if="!auth.isLoggedIn"
         ref="headerRef"
-        class="flex justify-center text-4xl ml-48 px-4 py-4 font-extrabold"
+        class="flex justify-center text-4xl ml-48 px-4 py-4 font-extrabold text-primary"
       >
         Welcome to the Finance App!
       </h1>     
       <div class="wrapper">
         <div class=" flex justify-center">
             <RouterLink
-              v-if="!auth.isLoggedIn"
+              v-if="!auth.isLoggedIn && route.path === '/'"
               to="/auth"
               class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200"
             >
@@ -91,16 +87,17 @@ function goGraphs(){
             </RouterLink>
 
             <div v-else class="text-center mt-4">
-              <br/><LogOut/>
-              <br/><h1>Welcome {{ auth.username }}!</h1><br/>
+              
               <div v-if="route.path === '/'">
-                <button @click="goToDashboard" class="hover:text-xl duration-150 font-medium px-3 py-3 rounded-lg bg-base-300">Go To Dashboard</button>
+                <br/><LogOut/>
+                <br/><h1 ref="headerRef" class="text-primary px-3 py-3 bg-base-200">Welcome {{ auth.username }}!</h1><br/>
+                <button @click="goToDashboard" class="hover:text-xl duration-150 font-medium px-3 py-3 rounded-lg bg-primary text-base-100">Go To Dashboard</button>
                 <br/><br/>
-                <button v-if="check.hasSubmittedExpense && check.hasSubmittedIncome" @click="goProfile" class="hover:text-xl duration-150 font-medium px-3 py-3 rounded-lg bg-base-300">Go To Your Profile</button>
+                <button v-if="check.hasSubmittedExpense && check.hasSubmittedIncome" @click="goProfile" class="hover:text-xl duration-150 font-medium px-3 py-3 rounded-lg bg-primary text-base-100">Go To Your Profile</button>
+                <br/><br/><br/>
+                <button v-if="check.hasSubmittedExpense && check.hasSubmittedIncome" @click="goMainHome" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-300">Go To Your Budgeting</button>
                 <br/><br/>
-                <button v-if="check.hasSubmittedExpense && check.hasSubmittedIncome" @click="goMainHome" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Your Budgeting</button>
-                <br/><br/>
-                <button v-if="check.hasSubmittedExpense && check.hasSubmittedIncome" @click="goGraphs" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Your Data</button>                
+                <button v-if="check.hasSubmittedExpense && check.hasSubmittedIncome" @click="goGraphs" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-300">Go To Your Data</button>                
             </div>
             </div>
         </div>

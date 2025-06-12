@@ -2,8 +2,8 @@
 <div class="flex place-content-center grid-cols-3 gap-16">
 
 <form v-if="showUser" class="form bg-base-200 rounded-lg px-32 py-5" @submit.prevent>   
-  <h1 v-if="showUpdateIfSubmitted" class="flex justify-center text-4xl ml-48 px-4 py-4 font-extrabold">UPDATE BASIC INFO</h1>
-  <h1 v-else class="flex justify-center text-4xl ml-48 px-4 py-4 font-extrabold">BASIC INFO</h1>
+  <h1 v-if="showUpdateIfSubmitted" class="flex justify-center text-4xl ml-48 px-4 py-4 font-extrabold text-primary">UPDATE BASIC INFO</h1>
+  <h1 v-else class="flex justify-center text-4xl ml-48 px-4 py-4 font-extrabold text-primary">BASIC INFO</h1>
   <input v-model="UserInfo.nName" placeholder="Preferred Name" /><br/>
 
   <h1>INCOME</h1>
@@ -15,7 +15,7 @@
   <input v-model.number="UserInfo.sav_goal" placeholder="MONTHLY SAVINGS GOAL"><br>
   <input v-model.number="UserInfo.spend_goal" placeholder="OVERALL MONTHLY SPENDING GOAL"><br>
   <div class="flex justify-center">
-    <button type="submit" @click="previewInfo()" class="font-medium italic cursor-pointer">Submit Form</button><br>
+    <button type="submit" @click="previewInfo()" class="font-medium italic cursor-pointer text-primary">Submit Form</button><br>
   </div>  
   <div class="flex justify-center">
     <button type="reset" class="font-medium italic cursor-pointer">Reset Values</button>

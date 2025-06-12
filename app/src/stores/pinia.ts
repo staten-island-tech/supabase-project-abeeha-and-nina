@@ -31,13 +31,13 @@ export const useAuthStore = defineStore('auth', () => {
   }
 }
 
-  function logout() {
-    supabase.auth.signOut()
-    isLoggedIn.value = false
-    currentUser.value = getEmptyUser()
-    localStorage.removeItem("hasSubmittedExpense")
-    localStorage.removeItem("hasSubmittedIncome")
-  }
+async function logout() {
+  await supabase.auth.signOut()
+  isLoggedIn.value = false
+  currentUser.value = getEmptyUser()
+  localStorage.removeItem("hasSubmittedExpense")
+  localStorage.removeItem("hasSubmittedIncome")
+}
 
   const username = computed(() => currentUser.value?.username || '')
 

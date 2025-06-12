@@ -28,18 +28,23 @@ import Column from 'primevue/column';
 import { supabase } from '@/supabase';
 import { useAuthStore } from '@/stores/pinia';
 import { onMounted, ref, computed } from 'vue';
-import { type Finance_Info, type CostType, type Expense } from '@/types';
+import { type FinanceInfo, type CostType, type Expense } from '@/types';
 import { type profileExpense } from '@/types';
+
+import type { displayFinance } from '@/types';
+
+const finance_info = ref<displayFinance[]>([]);
+
+
 const expense_info = ref<profileExpense[]>([])
+
+
 
 
 const authStore = useAuthStore()
 const currentUser = authStore.currentUser
 
 const auth = useAuthStore()
-
-const finance_info = ref<Finance_Info[]>([])
-
 
 async function getFinanceData() {
     if (!currentUser) return;
@@ -63,7 +68,10 @@ async function getFinanceData() {
 async function getExpenseData() {
     if (!currentUser) return;
           
-    const {data, error} = await supabase.from("expenses").select("category_name, budget_percent, cost_type").eq("user_id", currentUser.userId)
+    const {data, error} = await supabase.from("expenses")
+        .select("user_id, category_name, budget_percent, cost_type")
+        .eq("user_id", currentUser.userId)
+    
     if (error){
         alert(error)
         return

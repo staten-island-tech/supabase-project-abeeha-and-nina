@@ -1,4 +1,6 @@
-<template>
+<template></template>
+<script></script>
+<!-- <template>
     <h1 class="text-center">Log Transactions and Earnings</h1><br/>
     <div class="flex justify-center">
         <div class="grid grid-cols-2 gap-6">
@@ -38,7 +40,7 @@
     <Button type="submit" label="Add Expense"></Button>
 
     </Form>    <Message></Message>
-
+ -->
 
         <!-- <div class="flex justify-center">
     <AutoComplete v-model="selectedCategory" optionLabel="selectedCategory.name" :suggestions="categoryStore.categories"> 
@@ -61,7 +63,7 @@
     </AutoComplete>
     
     </div><br/><br/> -->
-    </Form>
+    <!-- </Form>
 
     
 </template>
@@ -103,4 +105,4 @@ const costType= {
 
 <style lang="ts" scoped>
 
-</style>
+</style> -->
