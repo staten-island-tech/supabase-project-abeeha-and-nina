@@ -14,6 +14,7 @@ import MainHome from '@/components/MainHome.vue'
 import SpendingTable from "@/components/Tables/SpendingTable.vue"
 import UserProfile from '@/components/ProfileInfo/UserProfile.vue'
 import LogOut from '@/components/LogOut.vue'
+import GraphData from '@/components/GraphData.vue'
 
 const router = createRouter({
   history: createWebHistory('/'),
@@ -85,25 +86,31 @@ const router = createRouter({
       path: '/logs',
       name: 'logs',
       component: LogData,
-      meta: {requiresAuth: true}  //Change later, just for testing
+      meta: {requiresAuth: true}  
     },
       {
       path: '/main',
       name: 'main',
       component: MainHome,
-      meta: {requiresAuth: true}  //Change later, just for testing
+      meta: {requiresAuth: true} 
     },
     {
       path: '/explog',
       name: 'explog',
       component: SpendingTable,
-      meta: {requiresAuth: true}  //Change later, just for testing
+      meta: {requiresAuth: true}  
     },
         {
       path: '/profile',
       name: 'profile',
       component: UserProfile,
-      meta: {requiresAuth: true}  //Change later, just for testing
+      meta: {requiresAuth: true}  
+    },
+    {
+      path: '/graphs',
+      name: 'graphs',
+      component: GraphData,
+      meta: {requiresAuth: true}  
     },
   ],
 })

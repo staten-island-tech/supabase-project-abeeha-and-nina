@@ -47,6 +47,13 @@ export interface DataLogs {
 
 }
 
+export interface profileExpense{
+  user_id: string,
+  category_name: string,
+  budget_percent: number,
+  cost_type: string
+}
+
 export interface Category  {
   name: string,
   budget_percent: percent | null,

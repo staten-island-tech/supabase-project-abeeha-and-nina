@@ -17,6 +17,7 @@ const auth = useAuthStore()
 const dashboardButtonVisible = ref<boolean>(true)
 const goMainHomeButtonVisible = ref<boolean>(true)
 const goProfileButtonVisible = ref<boolean>(true)
+const goGraphsButtonVisible = ref<boolean>(true)
 
 
 const headerRef = ref<HTMLElement | null>(null)
@@ -43,36 +44,21 @@ async function useAuth() {
 }
 
 function goToDashboard(){
-  dashboardButtonVisible.value = false
   router.push("/dashboard")
 }
 
 function goMainHome(){
-  goMainHomeButtonVisible.value = false
   router.push("/main")
 }
 
 function goProfile(){
-  goMainHomeButtonVisible.value = false
   router.push("/profile")
 }
 
-function turnTrue(){
-    dashboardButtonVisible.value = true
-    goMainHomeButtonVisible.value = true
-    goProfileButtonVisible.value = true
+function goGraphs(){
+  router.push("/graphs")
 }
 
-function turnHomeFalse(){
-    goMainHomeButtonVisible.value = false
-}
-
-function turnProfileFalse(){
-    goProfileButtonVisible.value = false
-}
-function turnDashboardFalse(){
-    dashboardButtonVisible.value = false
-}
 </script>
 
 <template>
@@ -85,7 +71,7 @@ function turnDashboardFalse(){
         <ThemeSelector />
       </div>
       <div class="pt-3 flex justify-center">
-      <RouterLink to="/" @click="turnTrue" class="cursor-pointer border-primary text-lg px-3 py-3 rounded-lg hover:text-3xl duration-200 border-4 border-solid bg-base-200">Home</RouterLink>
+      <RouterLink to="/" class="cursor-pointer border-primary text-lg px-3 py-3 rounded-lg hover:text-3xl duration-200 border-4 border-solid bg-base-200">Home</RouterLink>
       </div>
       <h1
         v-if="!auth.isLoggedIn"
@@ -108,11 +94,13 @@ function turnDashboardFalse(){
               <br/><LogOut/>
               <br/><h1>Welcome {{ auth.username }}!</h1><br/>
               <div v-if="route.path === '/'">
-                <button @click="goToDashboard" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Dashboard</button>
+                <button @click="goToDashboard" class="hover:text-xl duration-150 font-medium px-3 py-3 rounded-lg bg-base-300">Go To Dashboard</button>
+                <br/><br/>
+                <button v-if="check.hasSubmittedExpense && check.hasSubmittedIncome" @click="goProfile" class="hover:text-xl duration-150 font-medium px-3 py-3 rounded-lg bg-base-300">Go To Your Profile</button>
                 <br/><br/>
                 <button v-if="check.hasSubmittedExpense && check.hasSubmittedIncome" @click="goMainHome" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Your Budgeting</button>
                 <br/><br/>
-                <button v-if="check.hasSubmittedExpense && check.hasSubmittedIncome" @click="goProfile" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Your Profile</button>
+                <button v-if="check.hasSubmittedExpense && check.hasSubmittedIncome" @click="goGraphs" class="hover:text-xl duration-150 font-medium italic px-3 py-3 rounded-lg bg-base-200">Go To Your Data</button>                
             </div>
             </div>
         </div>
