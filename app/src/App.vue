@@ -7,6 +7,7 @@ import ThemeSelector from './components/ThemeSelector.vue'
 import { supabase } from './supabase';
 import LogOut from './components/LogOut.vue';
 import DashboardView from './views/DashboardView.vue';
+import Menu from 'primevue/menu';
 import router from './router';
 
 const auth = useAuthStore()
@@ -57,6 +58,9 @@ function turnDashboardFalse(){
 </script>
 
 <template>
+  <Menu>
+    
+  </Menu>
   <div class="min-h-screen bg-base-100 text-base-content">
     <header>
       <div class="pt-3 flex justify-center">
