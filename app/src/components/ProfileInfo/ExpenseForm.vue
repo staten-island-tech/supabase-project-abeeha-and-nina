@@ -40,6 +40,7 @@ import {reactive, ref} from "vue"
 import { supabase } from '@/supabase'
 import router from '@/router'
 import { finished } from 'stream'
+import { useCategoriesStore } from '@/stores/categories'
 import { checkSubmitted } from '@/stores/pinia'
 
 const check = checkSubmitted()
