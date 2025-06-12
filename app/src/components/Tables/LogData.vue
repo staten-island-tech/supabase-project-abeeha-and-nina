@@ -10,7 +10,34 @@
     </div><br/>
     
 
-    <Form v-slot="$form" :initialValues >
+    <Form v-slot="$form" :expenseStore.expenses :initialValues>
+
+    <FormField v-slot="$field" name="name" initialValue="" class="flex flex-col gap-1">
+        <input type="text" placeholder="Purchase Name" :class="[{ error: $field?.invalid }]" v-bind="$field.props" />
+        <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
+    </FormField>
+    <FormField v-slot="$field" name="price" initialValue="PrimeVue" class="flex flex-col gap-1">
+        <input v-model="$field.value" placeholder="Password" :class="[{ error: $field?.invalid }]" @input="$field.onInput" @blur="$field.onBlur" @change="$field.onChange" />
+        <Message v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</Message>
+    </FormField>
+    <Button type="submit" severity="secondary" label="Submit"></Button>
+    <InputText name="price" type="text" fluid></InputText>
+
+
+    <InputText name="name" :placeholder="initialValues.name" />
+    <InputText name="category" :placeholder="initialValues.category" />
+    <InputNumber name="price" :placeholder="initialValues.price" />
+    <Dropdown
+      name="type"
+      :options="costTypeOptions"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Purchase Type"
+    />
+    <Calendar name="date" :placeholder="initialValues.date" dateFormat="yy-mm-dd" />
+    <Button type="submit" label="Add Expense"></Button>
+
+    </Form>    <Message></Message>
 
 
         <!-- <div class="flex justify-center">
@@ -51,16 +78,18 @@ const auth = useAuthStore()
 const expenseStore = useExpensesStore()
 const categoryStore = useCategoriesStore()
 
-const initialValues = ref([
-    {name:"Purchase Name", 
-    price: "Purchase Price",
-    category: "Expense Category",
-    type:"Purchase Type",
-    date:"Date of Purchase"    }
-])
+const initialValues = {
+  name: "Purchase Name",
+  category: "Expense Category",
+  price: "Purchase Price",
+  type: "Purchase Type",
+  date: "Date of Purchase"
+}
 
+const costType= {
+    label: 
+}
 
-//
 
 
 

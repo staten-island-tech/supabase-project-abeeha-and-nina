@@ -85,12 +85,16 @@ export interface Expense {
   name:string | "Purchase Name"
   category:string | "Expense Category"
   price:number | "Purchase Price"
-  type:CostType | "Purhcase Type"
-  date:DateFormat | "Date of Purchas"
+  type:CostType | "Purchase Type"
+  date:DateFormat | "Date of Purchase"
 }
 
-export interface Finance_Info {
-  name:string
-  value:number
-}
 
+export interface FinanceInfo {
+  p_income: number | string;      
+  s_income: number | string;     
+  sav_goal: number | string;      
+  spend_goal: number | string;  
+  debt: number | string;          
+  logged_date: DateFormat; 
+}
