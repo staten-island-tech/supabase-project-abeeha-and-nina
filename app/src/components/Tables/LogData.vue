@@ -10,7 +10,7 @@
     </div><br/>
     
 
-    <Form v-slot="$form" :initialValues>
+    <Form v-slot="$form" :initialValues >
 
 
         <!-- <div class="flex justify-center">
@@ -44,6 +44,7 @@ import { useCategoriesStore } from '@/stores/categories';
 import { useExpensesStore } from '@/stores/expenses';
 import { ref } from 'vue';
 import { Form } from '@primevue/forms';
+import { useAuthStore } from '@/stores/pinia';
 
 const selectedCategory = ref()
 const auth = useAuthStore()
