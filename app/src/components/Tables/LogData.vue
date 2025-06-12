@@ -1,8 +1,12 @@
 <template>
-    <h1>Log Transactions and Earnings</h1>
-    <button>Add Transaction</button>
-    
-    <button>Add Additional Earnings</button>
+    <h1 class="text-center">Log Transactions and Earnings</h1><br/>
+    <div class="flex justify-center">
+        <div class="grid grid-cols-2 gap-6">
+    <button class="hover:text-xl duration-150 font-medium italic px-4 py-2 rounded-lg bg-base-200">Add Transaction</button>
+    <button class="hover:text-xl duration-150 font-medium italic px-4 py-2 rounded-lg bg-base-200">Add Additional Earnings</button>
+    </div>
+    </div><br/>
+    <div class="flex justify-center">
     <AutoComplete v-model="selectedCategory" optionLabel="label" :suggestions="c_options"> 
     <template #option="c_options">
             <div class="flex items-center">
@@ -19,6 +23,7 @@
             </div>
         </template>
     </AutoComplete>
+    </div><br/><br/>
 
     
 </template>

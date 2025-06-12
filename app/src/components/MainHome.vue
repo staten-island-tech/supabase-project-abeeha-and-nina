@@ -7,21 +7,18 @@
         <div class="flex justify-center">
             <IncomeTable></IncomeTable>
         </div>
-    </div><br/>
-    <div class="grid grid-cols-2">
+    </div><br/><br/>
         <div>
             <h1 class="text-center flex justify-center">SPENDING</h1>
             <div class="flex justify-center">
                 <SpendingTable></SpendingTable>
             </div>  
-        </div>
+        </div><br/><br/>
         <div>
-            <h1 class="text-center">EXPENSES</h1>
             <LogData></LogData>
         </div>
 
     </div>
-</div>
 </template>
 
 <script setup lang="ts">

@@ -16,6 +16,12 @@ export interface data {
   user: AppUser;
 }
 
+export interface profileExpense {
+  category_name: string;
+  cost_type: string;
+  budget_percent: number | null;
+}
+
 
 export interface DashboardView {
   type:Component,
@@ -79,9 +85,10 @@ export interface ProfileInfo {
 //UserProfile
 
 export interface Expense {
-  name:string
-  value:percent | string
-  type:CostType
+  user_id: string
+  category_name:string
+  cost_type: string
+  budget_percent: number | null
 }
 
 export interface Finance_Info {
