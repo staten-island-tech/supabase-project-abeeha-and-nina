@@ -85,22 +85,24 @@ function addCategory() {
 async function append_toProf() {
   const user = (await supabase.auth.getUser()).data.user;
   if (user) {
+    for (const newCategory of categories) {
     const { data, error } = await supabase.from('expenses').insert([{
       user_id: user.id,
       category_name: newCategory.name,
       budget_percent: newCategory.budget_percent,
       cost_type: newCategory.cost_type
     },
-  ])
+    ])
   if (error) {
     alert("Error updating expenses!")
     console.log(error)
-  }else{
+    return
+  }
+  }
     alert("Profile Updated!")
     showTab.value = false
     finishedAnExpense.value = true
     check.markExpenseSubmitted()
   }
   }
-}
 </script>

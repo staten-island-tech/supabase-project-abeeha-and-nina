@@ -1,38 +1,42 @@
 <template>
   <div class="w-full px-24">
-  <DataTable :value="expenses" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]" showGridlines tableStyle="max-width: 100rem">
-    <Column field="type" header="Type"></Column>
-    <Column field="name" header="Name"></Column>
-    <Column field="category" header="Category"></Column>
-    <Column field="price" header="Price"></Column>
-</DataTable>
-</div>
+    <DataTable :value="usersRowData" showGridlines tableStyle="max-width: 100rem">
+      <Column field="cost_type" header="Type"></Column>
+      <Column field="category_name" header="Category Name"></Column>
+      <Column field="budget_percent" header="Budget Percent"></Column>
+    </DataTable>
+    <pre>{{ usersRowData }}</pre>
+  </div>
 </template>
 
 <script lang="ts" setup>
-
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
-import { defineProps, onMounted } from 'vue';
-import userExpenses from "./LogData.vue"
-import getCategories from "./LogData.vue"
-import c_options from "./LogData.vue"
-import categories from "../ProfileInfo/ExpenseForm.vue"
+import { supabase } from '@/supabase';
+import { ref, onMounted } from 'vue'
+import type { expenses } from '@/types'
 
+const usersRowData = ref<expenses[]>([])
 
- defineProps ({
-  userExpenses,
-  getCategories,
-  c_options,
-  categories
-}
-)
+onMounted(async () => {
+  const { data: { user }, error: authError } = await supabase.auth.getUser()
 
-onMounted(() => {
-  
+  if (authError) {
+    alert("There was an error fetching user!")
+    return
+  }
+
+  if (user) {
+    const { data, error } = await supabase
+      .from('expenses')
+      .select("category_name, cost_type, budget_percent")
+      .eq('entry_id', user.id)
+
+    if (error) {
+      alert("There was an error fetching the data")
+    } else if (data) {
+      usersRowData.value = data
+    }
+  }
 })
 </script>
-
-<style lang="scss" scoped>
-
-</style>
