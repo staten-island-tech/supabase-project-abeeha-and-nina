@@ -22,8 +22,7 @@ const fetchExpenses = async (userId: string) => {
 
     
     if (supabaseError) throw supabaseError
-
-    const mappedExpenses = expense_data?.map(item =>({
+    const mappedExpenses = expense_data?.filter(item => item.purchase_name!=null).map(item =>({
         name: item.purchase_name,
         price: item.purchase_price,
         category: item.category_name,
@@ -31,6 +30,7 @@ const fetchExpenses = async (userId: string) => {
         date:item.created_at.substring(0, 10)
       }))
       expenses.value = mappedExpenses
+      console.log(expenses)
     }
     catch (error) {
         console.error(error)
