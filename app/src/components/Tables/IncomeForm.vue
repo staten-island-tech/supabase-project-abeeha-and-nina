@@ -12,7 +12,7 @@
             <InputText
               id="incomeSource"
               v-model="incomeSource"
-              placeholder="Enter income source (e.g., Freelance, Side Job)"
+              placeholder="Enter income source"
             />
           </div>
           

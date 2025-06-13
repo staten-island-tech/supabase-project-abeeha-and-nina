@@ -1,8 +1,11 @@
 <template>
 <div class="overflow-y-scroll">
+    
         <div>
-            <LogData></LogData>
-        </div>
+            <LogData>
+                
+            </LogData>
+        </div><br>
         <SpendingTable></SpendingTable><br>
         <IncomeTable></IncomeTable><br>
 

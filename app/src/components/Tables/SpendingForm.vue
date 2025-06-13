@@ -97,6 +97,7 @@ onMounted(async () => {
   }
 })
 
+
 const handleSubmit = async () => {
     if (!auth.currentUser?.userId) {
     console.error('User not authenticated')

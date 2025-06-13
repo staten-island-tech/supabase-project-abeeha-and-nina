@@ -1,4 +1,5 @@
 <template>
+  
     <h1 class="text-center">Log Transactions and Earnings</h1><br/>
     <div class="flex justify-center">
         <div class="grid grid-cols-2 gap-6">

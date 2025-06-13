@@ -1,4 +1,7 @@
 <template>
+    <h1 style="background: red; color: white; padding: 10px;">
+      LOGDATA COMPONENT IS RENDERING!
+    </h1>
   <Card>
     <template #title>
       Expense Logs
@@ -97,14 +100,19 @@ const formatDate = (dateString: string) => {
     day: 'numeric'
   })
 }
-
 onMounted(async () => {
+  console.log("Table component mounting...") // Debug: table mounting
+  console.log("Auth user on table mount:", auth.currentUser) // Debug: auth state
+  
   if (auth.currentUser?.userId) {
+    console.log("Fetching expenses...") // Debug: fetch starting
     await expenseStore.fetchExpenses()
+    console.log("After fetchExpenses:", expenseStore.expenses) // Debug: after fetch
+  } else {
+    console.log("No user ID, not fetching expenses") // Debug: no auth
   }
-  console.log(expenseStore.expenses)
-  console.log("Hello world")
-
+  
+  console.log("Final expenses for table:", expenseStore.expenses) // Debug: final state
 })
 </script>
 
