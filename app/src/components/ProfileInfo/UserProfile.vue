@@ -1,7 +1,7 @@
 <template>
 <div class="w-full px-36">
     <h1 class="text-center">Name: {{ auth.username }}</h1><br>
-    <h2 class="text-center">Username: {{ currentUser?.email }}</h2><br>
+    <h2 class="text-center">Email: {{ currentUser?.email }}</h2><br>
 
     <h1 class="text-center text-3xl">ALL RECORDED FINANCIAL DATA</h1>
 
