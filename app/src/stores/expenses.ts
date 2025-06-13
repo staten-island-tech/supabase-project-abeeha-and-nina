@@ -1,14 +1,16 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { supabase } from '@/supabase'
-import type { Expense } from '@/types'
+import type { CostType, Expense } from '@/types'
+import { useAuthStore } from './pinia'
 
 export const useExpensesStore = defineStore("expenses", () => {
     const expenses = ref<Expense[]>([])
     const loading = ref(false)
     const error = ref<string |null>(null)
+    const auth = useAuthStore()
 
-const fetchExpenses = async (userId: string) => {
+const fetchExpenses = async () => {
     if (expenses.value.length > 0) return
 
     loading.value = true
@@ -18,7 +20,7 @@ const fetchExpenses = async (userId: string) => {
       const { data:expense_data, error: supabaseError } = await supabase
         .from("expenses")
         .select("created_at, category_name, cost_type, purchase_price, purchase_name")
-        .eq("user_id", userId)
+        .eq("user_id", auth.currentUser?.userId)
 
     
     if (supabaseError) throw supabaseError
@@ -40,6 +42,7 @@ const fetchExpenses = async (userId: string) => {
     
 
 }
+
   return { expenses, loading, error, fetchExpenses }
 
 })

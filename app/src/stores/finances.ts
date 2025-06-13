@@ -17,30 +17,28 @@ const fetchFinances = async (userId: string) => {
     try {
       const { data:finance_data, error: supabaseError } = await supabase
         .from("user_personalized_responses")
-        .select("primary_income, secondary_income, savings_goal, spending_goal, debt")
+        .select("created_at, primary_income, secondary_income, savings_goal, spending_goal, debt")
         .eq("user_id", userId)
 
     
     if (supabaseError) throw supabaseError
-    const mappedFinances = finance_data?.map(item =>({
-,       p_income:item.primary_income,
-        s_income:item.secondary_income,
-        sav_goal:item.savings_goal,
-        spend_goal:item.spending_goal,
-        debt:item.debt
-        logged_date:item.created_at.substring(0, 10)
-      }))
+     const mappedFinances: FinanceInfo[] = finance_data?.map(item => ({
+                p_income: item.primary_income,
+                s_income: item.secondary_income,
+                sav_goal: item.savings_goal,
+                spend_goal: item.spending_goal,
+                debt: item.debt,
+                logged_date: item.created_at.substring(0, 10)}))
+
       finances.value = mappedFinances
-      console.log(expenses)
+      console.log(finances)
     }
     catch (error) {
         console.error(error)
     } finally {
       loading.value = false
     }
-    
-
-}
+  }
   return { finances, loading, error, fetchFinances }
 
 })
