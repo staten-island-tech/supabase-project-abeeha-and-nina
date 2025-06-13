@@ -39,23 +39,19 @@ async function logout() {
   localStorage.removeItem("hasSubmittedIncome")
 }
 
+async function init() {
+  const { data } = await supabase.auth.getSession()
+  const session = data.session
+
+  if (session?.user) {
+    await login(session.user)
+  } else {
+    isLoggedIn.value = false
+    currentUser.value = getEmptyUser()
+  }
+}
   const username = computed(() => currentUser.value?.username || '')
-
-  // async function fetchUsername(userId: string) {
-  //   const { data, error } = await supabase
-  //     .from('users')
-  //     .select('username')
-  //     .eq('id', userId)
-  //     .maybeSingle()
-
-  //   if (error) {
-  //     alert(error.message)
-  //   } else if (data) {
-  //     currentusername.value = data.username
-  //   }
-  // }
-
-  return { isLoggedIn, currentUser, username, login, logout, check }
+  return { isLoggedIn, currentUser, username, login, logout, check, init }
 })
 
 export const checkSubmitted = defineStore('forms', () => {

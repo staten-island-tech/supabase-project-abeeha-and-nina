@@ -6,6 +6,7 @@
                 
             </LogData>
         </div><br>
+
         <SpendingTable></SpendingTable><br>
         <IncomeTable></IncomeTable><br>
 

@@ -17,8 +17,8 @@ const auth = useAuthStore()
 
 const headerRef = ref<HTMLElement | null>(null)
 
-onMounted(async() => {
-  await useAuth()
+onMounted(async () => {
+  await auth.init()
   check.loadSubmissionState()
   gsap.from(headerRef.value, {
     y: -50,
@@ -27,17 +27,6 @@ onMounted(async() => {
     ease: "power2.out"
   })
 })
-
-async function useAuth() {
-  const { data } = await supabase.auth.getSession()
-  if (data.session) {
-    const user = data.session.user;
-    await auth.login(user)       
-    check.loadSubmissionState()
-  }
-  
-  
-}
 
 function goToDashboard(){
   router.push("/dashboard")

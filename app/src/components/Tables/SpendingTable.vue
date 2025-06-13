@@ -1,7 +1,4 @@
 <template>
-    <h1 style="background: red; color: white; padding: 10px;">
-      LOGDATA COMPONENT IS RENDERING!
-    </h1>
   <Card>
     <template #title>
       Expense Logs
@@ -75,7 +72,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeMount } from 'vue'
 import { FilterMatchMode } from '@primevue/core/api'
 import { useExpensesStore } from '@/stores/expenses'
 import { useAuthStore } from '@/stores/pinia'
@@ -100,6 +97,9 @@ const formatDate = (dateString: string) => {
     day: 'numeric'
   })
 }
+onBeforeMount(() => {
+  console.log("SpendingLog onBeforeMount triggered")
+})
 onMounted(async () => {
   console.log("Table component mounting...") // Debug: table mounting
   console.log("Auth user on table mount:", auth.currentUser) // Debug: auth state
@@ -113,7 +113,9 @@ onMounted(async () => {
   }
   
   console.log("Final expenses for table:", expenseStore.expenses) // Debug: final state
-})
+}
+
+)
 </script>
 
 <style lang="scss" scoped>
