@@ -45,12 +45,12 @@ import { useAuthStore } from '@/stores/pinia';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Card from 'primevue/card';
-import type { FinanceInfo, Expense } from '@/types';
+import type { displayFinance, profileExpense } from '@/types';
 
 const container = ref(null);
 
-const finance_info = ref([]);
-const expense_info = ref([]);
+const finance_info = ref<displayFinance[]>([]);
+const expense_info = ref<profileExpense[]>([]);
 
 const authStore = useAuthStore();
 const currentUser = authStore.currentUser;
