@@ -32,7 +32,6 @@ const fetchExpenses = async () => {
         date:item.created_at.substring(0, 10)
       }))
       expenses.value = mappedExpenses
-      console.log(expenses)
     }
     catch (error) {
         console.error(error)

@@ -3,6 +3,8 @@
         <div>
             <LogData></LogData>
         </div>
+        <SpendingTable></SpendingTable><br>
+        <IncomeTable></IncomeTable><br>
 
     </div>
 </template>

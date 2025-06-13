@@ -4,7 +4,7 @@
         <div class="grid grid-cols-2 gap-6">
     <button v-if="showAddExpense != true" @click="showExpenseForm" class="hover:text-xl duration-150 font-medium italic px-4 py-2 rounded-lg bg-base-200">Add Transaction</button>
     <SpendingTable v-if="showAddExpense"/>
-    <button @click="showIncomeForm()" v-if="showAddExpense != true" class="hover:text-xl duration-150 font-medium italic px-4 py-2 rounded-lg bg-base-200">Add Additional Earnings</button>
+    <button @click="showIncomeForm()" v-if="showAddIncome != true" class="hover:text-xl duration-150 font-medium italic px-4 py-2 rounded-lg bg-base-200">Add Additional Earnings</button>
     <IncomeTable v-if="showAddIncome" />
     </div>
     
