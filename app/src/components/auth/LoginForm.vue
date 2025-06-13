@@ -43,7 +43,9 @@ const logInUser = async() =>{
       </div>
     </form>
     <RouterLink to="/reset" class="flex justify-center pt-3 hover:text-xl duration-200 font-medium italic"
-            >Reset Password</RouterLink><br>
+            >Reset Password</RouterLink>
+    <RouterLink to="/register" class="flex justify-center pt-3 hover:text-xl duration-200 font-medium italic"
+            >Register Instead</RouterLink><br>        
   </div>
 </div>
 </template>

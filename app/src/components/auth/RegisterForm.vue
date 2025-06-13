@@ -18,6 +18,8 @@
       <div class="flex justify-center pt-3 hover:text-xl duration-200 font-medium italic cursor-pointer">
         <input type="submit" value="Ready to Register!">
       </div>
+          <RouterLink to="/login" class="flex justify-center pt-3 hover:text-xl duration-200 font-medium italic"
+            >Log In Instead</RouterLink><br>    
       </form>
     </div>
     </div>

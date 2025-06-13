@@ -16,6 +16,8 @@
         <Column field="category_name" header="Category"></Column>
         <Column field="budget_percent" header="Percent of Budget"></Column>
         <Column field="cost_type" header="Cost Type"></Column>
+        <Column field="purchase_price" header="Purchase Price"></Column>
+
 
     </DataTable><br/><br/>
     </div>
@@ -69,7 +71,7 @@ async function getExpenseData() {
     if (!currentUser) return;
           
     const {data, error} = await supabase.from("expenses")
-        .select("user_id, category_name, budget_percent, cost_type")
+        .select("user_id, category_name, budget_percent, cost_type, purchase_price")
         .eq("user_id", currentUser.userId)
     
     if (error){

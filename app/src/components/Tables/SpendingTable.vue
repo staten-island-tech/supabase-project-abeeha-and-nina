@@ -12,7 +12,7 @@
         :rows="10"
         :rowsPerPageOptions="[5, 10, 20, 50]"
         tableStyle="min-width: 50rem"
-        :globalFilterFields="['name', 'category', 'type']"
+        :globalFilterFields="['name', 'category', 'price', 'type']"
       >
         <template #header>
           <div class="flex justify-content-between align-items-center">
